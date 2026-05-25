@@ -1,272 +1,1171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Linkku — Bookmark Manager</title>
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"
+/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: var(--font-sans); }
-#app { padding: 1rem 0; }
-.header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
-.header h1 { font-size: 20px; font-weight: 500; color: var(--color-text-primary); }
-.add-bar { display: flex; gap: 8px; margin-bottom: 1.5rem; }
-.add-bar input { flex: 1; }
-.add-bar button { white-space: nowrap; }
-.filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem; align-items: center; }
-.tag-pill { font-size: 12px; padding: 4px 12px; border-radius: 99px; border: 0.5px solid var(--color-border-secondary); color: var(--color-text-secondary); cursor: pointer; background: transparent; }
-.tag-pill.active { background: var(--color-background-secondary); color: var(--color-text-primary); border-color: var(--color-border-primary); }
-.search-wrap { margin-left: auto; }
-.search-wrap input { width: 180px; font-size: 13px; }
-.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
-.card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; display: flex; flex-direction: column; gap: 8px; }
-.card-top { display: flex; align-items: flex-start; gap: 10px; }
-.favicon { width: 20px; height: 20px; border-radius: 4px; flex-shrink: 0; margin-top: 2px; object-fit: contain; }
-.favicon-placeholder { width: 20px; height: 20px; border-radius: 4px; flex-shrink: 0; background: var(--color-background-secondary); display: flex; align-items: center; justify-content: center; }
-.card-title { font-size: 14px; font-weight: 500; color: var(--color-text-primary); line-height: 1.4; }
-.card-url { font-size: 12px; color: var(--color-text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.card-note { font-size: 13px; color: var(--color-text-secondary); line-height: 1.5; }
-.card-summary { font-size: 12px; color: var(--color-text-tertiary); line-height: 1.5; font-style: italic; }
-.card-tags { display: flex; gap: 6px; flex-wrap: wrap; }
-.tag { font-size: 11px; padding: 2px 8px; border-radius: 99px; background: var(--color-background-secondary); color: var(--color-text-secondary); }
-.card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 4px; }
-.card-footer a { font-size: 12px; color: var(--color-text-info); text-decoration: none; display: flex; align-items: center; gap: 4px; }
-.card-actions { display: flex; gap: 4px; }
-.icon-btn { background: none; border: none; cursor: pointer; color: var(--color-text-secondary); font-size: 16px; padding: 2px 4px; border-radius: 4px; }
-.icon-btn:hover { background: var(--color-background-secondary); color: var(--color-text-primary); }
-.loading-card { background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; font-size: 13px; color: var(--color-text-secondary); display: flex; align-items: center; gap: 8px; }
-.pulse { animation: pulse 1.2s infinite; }
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
-.empty { text-align: center; color: var(--color-text-secondary); font-size: 14px; padding: 3rem 1rem; grid-column: 1/-1; }
-.cat-badge { font-size: 11px; padding: 2px 8px; border-radius: 99px; background: #E6F1FB; color: #0C447C; }
-.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: center; z-index: 100; }
-.modal { background: var(--color-background-primary); border-radius: var(--border-radius-lg); border: 0.5px solid var(--color-border-tertiary); padding: 1.5rem; width: 340px; display: flex; flex-direction: column; gap: 12px; }
-.modal h2 { font-size: 16px; font-weight: 500; }
-.modal label { font-size: 13px; color: var(--color-text-secondary); display: block; margin-bottom: 4px; }
-.modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 4px; }
-</style>
 
-<h2 class="sr-only">Bookmark Manager — simpan dan kelola link dengan AI</h2>
+:root{
+  --bg:#0f0f10;
+  --surface:#171717;
+  --surface-hover:#1d1d1d;
+
+  --border:#2b2b2b;
+
+  --text:#f5f5f5;
+  --text-secondary:#a1a1aa;
+  --text-muted:#71717a;
+
+  --primary:#ffffff;
+
+  --radius:22px;
+  --radius-md:16px;
+  --radius-sm:12px;
+
+  --transition:.2s ease;
+
+  --shadow:
+    0 1px 1px rgba(0,0,0,.4),
+    0 10px 40px rgba(0,0,0,.35);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html,
+body{
+  width:100%;
+  min-height:100%;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+
+  font-family:
+    Inter,
+    system-ui,
+    sans-serif;
+
+  -webkit-font-smoothing:antialiased;
+}
+
+/* APP */
+
+#app{
+  width:100%;
+  max-width:1500px;
+
+  margin:auto;
+
+  padding:40px 28px 80px;
+}
+
+/* HEADER */
+
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  margin-bottom:30px;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  font-size:48px;
+  font-weight:700;
+  letter-spacing:-2px;
+}
+
+.logo i{
+  font-size:40px;
+}
+
+#count-badge{
+  color:var(--text-secondary);
+  font-size:14px;
+}
+
+/* TOP BAR */
+
+.add-bar{
+  display:flex;
+  gap:16px;
+
+  margin-bottom:26px;
+}
+
+.input{
+  width:100%;
+  height:72px;
+
+  border-radius:20px;
+  border:1px solid var(--border);
+
+  background:var(--surface);
+
+  color:var(--text);
+
+  padding:0 24px;
+
+  font-size:18px;
+
+  outline:none;
+
+  transition:var(--transition);
+}
+
+.input::placeholder{
+  color:#666;
+}
+
+.input:focus{
+  border-color:#444;
+  background:#1c1c1c;
+}
+
+.primary-btn{
+  height:72px;
+
+  border:none;
+
+  background:transparent;
+  color:white;
+
+  border:1px solid #3a3a3a;
+
+  padding:0 26px;
+
+  border-radius:20px;
+
+  font-size:18px;
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:var(--transition);
+
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  flex-shrink:0;
+}
+
+.primary-btn:hover{
+  background:#202020;
+  transform:translateY(-1px);
+}
+
+/* FILTER */
+
+.filters{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  margin-bottom:34px;
+
+  flex-wrap:wrap;
+}
+
+.tag-pill{
+  border:none;
+
+  background:transparent;
+
+  border:1px solid var(--border);
+
+  color:var(--text-secondary);
+
+  padding:14px 22px;
+
+  border-radius:999px;
+
+  font-size:15px;
+  font-weight:500;
+
+  cursor:pointer;
+
+  transition:var(--transition);
+}
+
+.tag-pill:hover{
+  background:#1e1e1e;
+  color:white;
+}
+
+.tag-pill.active{
+  background:#202020;
+  color:white;
+  border-color:#3a3a3a;
+}
+
+.search-wrap{
+  margin-left:auto;
+}
+
+.search-input{
+  width:340px;
+  height:60px;
+
+  border:none;
+  outline:none;
+
+  border-radius:18px;
+
+  background:var(--surface);
+
+  border:1px solid var(--border);
+
+  color:white;
+
+  padding:0 20px;
+
+  font-size:16px;
+}
+
+/* GRID */
+
+.cards{
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fill,minmax(340px,1fr));
+
+  gap:18px;
+}
+
+/* CARD */
+
+.card{
+  background:var(--surface);
+
+  border:1px solid var(--border);
+
+  border-radius:var(--radius);
+
+  padding:22px;
+
+  transition:var(--transition);
+
+  box-shadow:var(--shadow);
+
+  display:flex;
+  flex-direction:column;
+
+  gap:18px;
+}
+
+.card:hover{
+  transform:translateY(-3px);
+  border-color:#3a3a3a;
+  background:var(--surface-hover);
+}
+
+.card-top{
+  display:flex;
+  align-items:flex-start;
+  gap:14px;
+}
+
+.favicon{
+  width:44px;
+  height:44px;
+
+  border-radius:14px;
+
+  object-fit:cover;
+
+  flex-shrink:0;
+}
+
+.favicon-placeholder{
+  width:44px;
+  height:44px;
+
+  border-radius:14px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:#232323;
+
+  color:#888;
+
+  flex-shrink:0;
+}
+
+.card-title{
+  font-size:18px;
+  font-weight:600;
+
+  line-height:1.4;
+}
+
+.card-url{
+  margin-top:5px;
+
+  font-size:13px;
+
+  color:var(--text-muted);
+
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.card-summary{
+  color:#b4b4b4;
+
+  font-size:14px;
+
+  line-height:1.7;
+}
+
+.card-note{
+  font-size:14px;
+
+  line-height:1.7;
+
+  color:#e5e5e5;
+}
+
+.card-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.tag,
+.cat-badge{
+  font-size:12px;
+  font-weight:500;
+
+  padding:7px 12px;
+
+  border-radius:999px;
+}
+
+.tag{
+  background:#242424;
+  color:#b0b0b0;
+}
+
+.cat-badge{
+  background:#2d2d2d;
+  color:white;
+}
+
+.card-footer{
+  margin-top:auto;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.card-footer a{
+  text-decoration:none;
+
+  color:#d4d4d8;
+
+  font-size:14px;
+
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.card-footer a:hover{
+  color:white;
+}
+
+.card-actions{
+  display:flex;
+  gap:8px;
+}
+
+.icon-btn{
+  width:38px;
+  height:38px;
+
+  border:none;
+
+  border-radius:12px;
+
+  background:transparent;
+
+  color:#8b8b8b;
+
+  cursor:pointer;
+
+  transition:var(--transition);
+
+  font-size:17px;
+}
+
+.icon-btn:hover{
+  background:#252525;
+  color:white;
+}
+
+/* EMPTY */
+
+.empty{
+  grid-column:1/-1;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  padding:120px 20px;
+
+  color:var(--text-secondary);
+
+  text-align:center;
+}
+
+.empty i{
+  font-size:58px;
+  margin-bottom:16px;
+}
+
+.empty h3{
+  font-size:26px;
+  margin-bottom:10px;
+}
+
+.empty p{
+  font-size:15px;
+}
+
+/* LOADING */
+
+.loading-card{
+  background:#181818;
+
+  border:1px solid var(--border);
+
+  border-radius:var(--radius);
+
+  padding:24px;
+
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  color:#b0b0b0;
+}
+
+.pulse{
+  animation:pulse 1.2s infinite;
+}
+
+@keyframes pulse{
+  0%,100%{opacity:1}
+  50%{opacity:.45}
+}
+
+/* MODAL */
+
+.modal-overlay{
+  position:fixed;
+  inset:0;
+
+  background:rgba(0,0,0,.6);
+
+  backdrop-filter:blur(8px);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  z-index:999;
+}
+
+.modal{
+  width:420px;
+
+  background:#181818;
+
+  border:1px solid #2b2b2b;
+
+  border-radius:28px;
+
+  padding:28px;
+
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.modal h2{
+  font-size:24px;
+}
+
+.modal label{
+  display:block;
+
+  margin-bottom:8px;
+
+  color:#9ca3af;
+
+  font-size:14px;
+}
+
+.modal textarea,
+.modal input{
+  width:100%;
+
+  border:none;
+  outline:none;
+
+  background:#202020;
+
+  border:1px solid #303030;
+
+  border-radius:14px;
+
+  color:white;
+
+  padding:14px 16px;
+
+  font-size:14px;
+}
+
+.modal-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:12px;
+}
+
+.modal-btn{
+  height:48px;
+
+  border:none;
+
+  border-radius:14px;
+
+  padding:0 18px;
+
+  cursor:pointer;
+
+  font-weight:600;
+}
+
+.btn-secondary{
+  background:#252525;
+  color:white;
+}
+
+.btn-primary{
+  background:white;
+  color:black;
+}
+
+/* MOBILE */
+
+@media (max-width:768px){
+
+  #app{
+    padding:24px 18px 60px;
+  }
+
+  .logo{
+    font-size:34px;
+  }
+
+  .logo i{
+    font-size:30px;
+  }
+
+  .add-bar{
+    flex-direction:column;
+  }
+
+  .primary-btn{
+    width:100%;
+    justify-content:center;
+  }
+
+  .search-wrap{
+    width:100%;
+    margin-left:0;
+  }
+
+  .search-input{
+    width:100%;
+  }
+
+  .cards{
+    grid-template-columns:1fr;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
 <div id="app">
+
   <div class="header">
-    <h1><i class="ti ti-bookmark" aria-hidden="true"></i> Linkku</h1>
-    <span id="count-badge" style="font-size:13px;color:var(--color-text-secondary)"></span>
+    <div class="logo">
+      <i class="ti ti-bookmark"></i>
+      Linkku
+    </div>
+
+    <span id="count-badge">
+      0 link
+    </span>
   </div>
 
   <div class="add-bar">
-    <input id="url-input" type="url" placeholder="Paste URL di sini..." />
-    <button id="add-btn" onclick="handleAdd()"><i class="ti ti-plus" aria-hidden="true"></i> Tambah ↗</button>
+    <input
+      id="url-input"
+      class="input"
+      type="url"
+      placeholder="Paste URL di sini..."
+    />
+
+    <button
+      id="add-btn"
+      class="primary-btn"
+    >
+      <i class="ti ti-plus"></i>
+      Tambah ↗
+    </button>
   </div>
 
   <div class="filters" id="filters">
-    <button class="tag-pill active" data-cat="all" onclick="filterCat(this,'all')">Semua</button>
+
+    <button
+      class="tag-pill active"
+      data-cat="all"
+    >
+      Semua
+    </button>
+
     <div class="search-wrap">
-      <input id="search-input" type="text" placeholder="Cari..." oninput="renderCards()" style="font-size:13px;" />
+      <input
+        id="search-input"
+        class="search-input"
+        type="text"
+        placeholder="Cari..."
+      />
     </div>
+
   </div>
 
-  <div class="cards" id="cards-container"></div>
+  <div
+    class="cards"
+    id="cards-container"
+  ></div>
+
 </div>
 
-<div id="modal" style="display:none"></div>
+<div id="modal"></div>
 
 <script>
-const STORAGE_KEY = 'linkku_bookmarks_v1';
+
+const STORAGE_KEY = "linkku_bookmarks_v2";
+
 let bookmarks = [];
-let activeCategory = 'all';
+let activeCategory = "all";
 
-async function loadData() {
-  try {
-    const r = await window.storage.get(STORAGE_KEY);
-    if (r && r.value) bookmarks = JSON.parse(r.value);
-  } catch(e) { bookmarks = []; }
-  renderAll();
+/* STORAGE */
+
+function saveData(){
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(bookmarks)
+  );
 }
 
-async function saveData() {
-  try { await window.storage.set(STORAGE_KEY, JSON.stringify(bookmarks)); } catch(e) {}
-}
+function loadData(){
+  const raw = localStorage.getItem(STORAGE_KEY);
 
-function getDomain(url) {
-  try { return new URL(url).hostname.replace('www.',''); } catch(e) { return url; }
-}
-
-function getFaviconUrl(url) {
-  try { const u = new URL(url); return `https://www.google.com/s2/favicons?domain=${u.hostname}&sz=32`; } catch(e) { return null; }
-}
-
-async function fetchMetaWithAI(url) {
-  const domain = getDomain(url);
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 300,
-      messages: [{
-        role: "user",
-        content: `Berikan judul halaman, ringkasan singkat (1-2 kalimat), dan 2-3 tag kategori untuk URL ini: ${url}\n\nRespond ONLY in this JSON format (no markdown):\n{"title":"...","summary":"...","tags":["...","..."],"category":"..."}`
-      }]
-    })
-  });
-  const data = await res.json();
-  const text = data.content.map(i => i.text||'').join('').replace(/```json|```/g,'').trim();
-  return JSON.parse(text);
-}
-
-async function handleAdd() {
-  const input = document.getElementById('url-input');
-  const url = input.value.trim();
-  if (!url) return;
-  input.value = '';
-
-  const tempId = Date.now().toString();
-  const loadingEl = document.createElement('div');
-  loadingEl.className = 'loading-card pulse';
-  loadingEl.id = 'loading-' + tempId;
-  loadingEl.innerHTML = `<i class="ti ti-loader" aria-hidden="true"></i> AI sedang menganalisis link...`;
-  document.getElementById('cards-container').prepend(loadingEl);
-
-  try {
-    const meta = await fetchMetaWithAI(url);
-    const bookmark = {
-      id: tempId,
-      url,
-      title: meta.title || getDomain(url),
-      summary: meta.summary || '',
-      tags: meta.tags || [],
-      category: meta.category || 'Lainnya',
-      note: '',
-      favicon: getFaviconUrl(url),
-      createdAt: new Date().toISOString()
-    };
-    bookmarks.unshift(bookmark);
-    await saveData();
-  } catch(e) {
-    bookmarks.unshift({
-      id: tempId, url,
-      title: getDomain(url),
-      summary: '', tags: [], category: 'Lainnya',
-      note: '', favicon: getFaviconUrl(url),
-      createdAt: new Date().toISOString()
-    });
-    await saveData();
+  if(raw){
+    bookmarks = JSON.parse(raw);
   }
+
   renderAll();
 }
 
-function filterCat(el, cat) {
+/* HELPERS */
+
+function escHtml(str=""){
+  return str
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;");
+}
+
+function getDomain(url){
+  try{
+    return new URL(url)
+      .hostname
+      .replace("www.","");
+  }catch{
+    return url;
+  }
+}
+
+function getFavicon(url){
+  try{
+    const u = new URL(url);
+
+    return `https://www.google.com/s2/favicons?domain=${u.hostname}&sz=64`;
+
+  }catch{
+    return "";
+  }
+}
+
+/* ADD */
+
+function handleAdd(){
+
+  const input =
+    document.getElementById("url-input");
+
+  let url = input.value.trim();
+
+  if(!url) return;
+
+  if(!/^https?:\/\//i.test(url)){
+    url = "https://" + url;
+  }
+
+  const bookmark = {
+    id: crypto.randomUUID(),
+    url,
+    title: getDomain(url),
+    summary: "",
+    note: "",
+    category: "Umum",
+    tags: [],
+    favicon: getFavicon(url),
+    createdAt: new Date().toISOString()
+  };
+
+  bookmarks.unshift(bookmark);
+
+  saveData();
+
+  input.value = "";
+
+  renderAll();
+}
+
+/* DELETE */
+
+function deleteBookmark(id){
+
+  const ok = confirm(
+    "Hapus bookmark ini?"
+  );
+
+  if(!ok) return;
+
+  bookmarks =
+    bookmarks.filter(
+      b => b.id !== id
+    );
+
+  saveData();
+
+  renderAll();
+}
+
+/* EDIT */
+
+function editNote(id){
+
+  const b =
+    bookmarks.find(x => x.id === id);
+
+  if(!b) return;
+
+  const modal =
+    document.getElementById("modal");
+
+  modal.innerHTML = `
+    <div class="modal-overlay">
+
+      <div class="modal">
+
+        <h2>Edit Bookmark</h2>
+
+        <div>
+          <label>Catatan</label>
+
+          <textarea
+            id="note-input"
+            rows="4"
+          >${escHtml(b.note || "")}</textarea>
+        </div>
+
+        <div>
+          <label>Kategori</label>
+
+          <input
+            id="cat-input"
+            value="${escHtml(b.category || "")}"
+          />
+        </div>
+
+        <div class="modal-actions">
+
+          <button
+            class="modal-btn btn-secondary"
+            onclick="closeModal()"
+          >
+            Batal
+          </button>
+
+          <button
+            class="modal-btn btn-primary"
+            onclick="saveNote('${b.id}')"
+          >
+            Simpan
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+  `;
+}
+
+function closeModal(){
+  document.getElementById("modal")
+    .innerHTML = "";
+}
+
+function saveNote(id){
+
+  const b =
+    bookmarks.find(x => x.id === id);
+
+  if(!b) return;
+
+  b.note =
+    document.getElementById("note-input")
+      .value;
+
+  b.category =
+    document.getElementById("cat-input")
+      .value || "Umum";
+
+  saveData();
+
+  closeModal();
+
+  renderAll();
+}
+
+/* FILTER */
+
+function filterCat(cat){
+
   activeCategory = cat;
-  document.querySelectorAll('.tag-pill').forEach(p => p.classList.remove('active'));
-  el.classList.add('active');
+
+  renderFilters();
   renderCards();
 }
 
-function renderFilters() {
-  const cats = ['all', ...new Set(bookmarks.map(b => b.category).filter(Boolean))];
-  const container = document.getElementById('filters');
-  const search = container.querySelector('.search-wrap');
-  container.innerHTML = '';
+function renderFilters(){
+
+  const wrap =
+    document.getElementById("filters");
+
+  const cats = [
+    "all",
+    ...new Set(
+      bookmarks.map(
+        b => b.category
+      )
+    )
+  ];
+
+  wrap.innerHTML = "";
+
   cats.forEach(cat => {
-    const btn = document.createElement('button');
-    btn.className = 'tag-pill' + (cat === activeCategory ? ' active' : '');
-    btn.textContent = cat === 'all' ? 'Semua' : cat;
-    btn.dataset.cat = cat;
-    btn.onclick = () => filterCat(btn, cat);
-    container.appendChild(btn);
+
+    const btn =
+      document.createElement("button");
+
+    btn.className =
+      "tag-pill" +
+      (
+        cat === activeCategory
+          ? " active"
+          : ""
+      );
+
+    btn.innerText =
+      cat === "all"
+        ? "Semua"
+        : cat;
+
+    btn.onclick = () =>
+      filterCat(cat);
+
+    wrap.appendChild(btn);
+
   });
-  container.appendChild(search);
+
+  const search =
+  document.createElement("div");
+
+  search.className =
+    "search-wrap";
+
+  search.innerHTML = `
+    <input
+      id="search-input"
+      class="search-input"
+      placeholder="Cari..."
+      oninput="renderCards()"
+    />
+  `;
+
+  wrap.appendChild(search);
 }
 
-function renderCards() {
-  const q = (document.getElementById('search-input').value||'').toLowerCase();
-  const container = document.getElementById('cards-container');
-  container.innerHTML = '';
+/* CARDS */
+
+function renderCards(){
+
+  const container =
+    document.getElementById(
+      "cards-container"
+    );
+
+  const q =
+    (
+      document
+        .getElementById("search-input")
+        ?.value || ""
+    ).toLowerCase();
 
   let filtered = bookmarks;
-  if (activeCategory !== 'all') filtered = filtered.filter(b => b.category === activeCategory);
-  if (q) filtered = filtered.filter(b =>
-    b.title.toLowerCase().includes(q) ||
-    b.url.toLowerCase().includes(q) ||
-    (b.note||'').toLowerCase().includes(q) ||
-    (b.tags||[]).some(t => t.toLowerCase().includes(q))
-  );
 
-  document.getElementById('count-badge').textContent = `${filtered.length} link`;
+  if(activeCategory !== "all"){
+    filtered =
+      filtered.filter(
+        b => b.category === activeCategory
+      );
+  }
 
-  if (!filtered.length) {
-    container.innerHTML = '<div class="empty"><i class="ti ti-bookmark-off" style="font-size:32px;display:block;margin-bottom:8px" aria-hidden="true"></i>Belum ada link tersimpan</div>';
+  if(q){
+
+    filtered =
+      filtered.filter(b => {
+
+        return (
+          b.title.toLowerCase().includes(q) ||
+          b.url.toLowerCase().includes(q) ||
+          b.note.toLowerCase().includes(q)
+        );
+
+      });
+
+  }
+
+  document.getElementById(
+    "count-badge"
+  ).innerText =
+    `${filtered.length} link`;
+
+  if(!filtered.length){
+
+    container.innerHTML = `
+      <div class="empty">
+
+        <i class="ti ti-bookmark-off"></i>
+
+        <h3>Belum ada link</h3>
+
+        <p>
+          Tambahkan URL pertama kamu
+        </p>
+
+      </div>
+    `;
+
     return;
   }
 
+  container.innerHTML = "";
+
   filtered.forEach(b => {
-    const card = document.createElement('div');
-    card.className = 'card';
+
+    const card =
+      document.createElement("div");
+
+    card.className = "card";
+
     card.innerHTML = `
+
       <div class="card-top">
-        ${b.favicon ? `<img class="favicon" src="${b.favicon}" onerror="this.style.display='none'" alt="" />` : `<div class="favicon-placeholder"><i class="ti ti-link" style="font-size:12px" aria-hidden="true"></i></div>`}
-        <div style="flex:1;min-width:0">
-          <div class="card-title">${escHtml(b.title)}</div>
-          <div class="card-url">${escHtml(getDomain(b.url))}</div>
+
+        ${
+          b.favicon
+
+          ? `
+            <img
+              class="favicon"
+              src="${b.favicon}"
+            />
+          `
+
+          : `
+            <div class="favicon-placeholder">
+              <i class="ti ti-world"></i>
+            </div>
+          `
+        }
+
+        <div style="min-width:0">
+
+          <div class="card-title">
+            ${escHtml(b.title)}
+          </div>
+
+          <div class="card-url">
+            ${escHtml(getDomain(b.url))}
+          </div>
+
         </div>
+
       </div>
-      ${b.summary ? `<div class="card-summary">${escHtml(b.summary)}</div>` : ''}
-      ${b.note ? `<div class="card-note">${escHtml(b.note)}</div>` : ''}
+
+      ${
+        b.summary
+
+        ? `
+          <div class="card-summary">
+            ${escHtml(b.summary)}
+          </div>
+        `
+
+        : ""
+      }
+
+      ${
+        b.note
+
+        ? `
+          <div class="card-note">
+            ${escHtml(b.note)}
+          </div>
+        `
+
+        : ""
+      }
+
       <div class="card-tags">
-        ${b.category ? `<span class="cat-badge">${escHtml(b.category)}</span>` : ''}
-        ${(b.tags||[]).map(t => `<span class="tag">${escHtml(t)}</span>`).join('')}
+
+        <span class="cat-badge">
+          ${escHtml(b.category)}
+        </span>
+
       </div>
+
       <div class="card-footer">
-        <a href="${escHtml(b.url)}" target="_blank"><i class="ti ti-external-link" aria-hidden="true"></i> Buka</a>
+
+        <a
+          href="${escHtml(b.url)}"
+          target="_blank"
+        >
+          <i class="ti ti-external-link"></i>
+          Buka
+        </a>
+
         <div class="card-actions">
-          <button class="icon-btn" title="Edit catatan" onclick="editNote('${b.id}')"><i class="ti ti-edit" aria-hidden="true"></i></button>
-          <button class="icon-btn" title="Hapus" onclick="deleteBookmark('${b.id}')"><i class="ti ti-trash" aria-hidden="true"></i></button>
+
+          <button
+            class="icon-btn"
+            onclick="editNote('${b.id}')"
+          >
+            <i class="ti ti-edit"></i>
+          </button>
+
+          <button
+            class="icon-btn"
+            onclick="deleteBookmark('${b.id}')"
+          >
+            <i class="ti ti-trash"></i>
+          </button>
+
         </div>
+
       </div>
+
     `;
+
     container.appendChild(card);
+
   });
+
 }
 
-function renderAll() { renderFilters(); renderCards(); }
-
-function escHtml(s) {
-  return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+function renderAll(){
+  renderFilters();
+  renderCards();
 }
 
-function editNote(id) {
-  const b = bookmarks.find(x => x.id === id);
-  if (!b) return;
-  const modal = document.getElementById('modal');
-  modal.style.display = 'flex';
-  modal.innerHTML = `
-    <div class="modal-overlay" onclick="if(event.target===this)closeModal()">
-      <div class="modal">
-        <h2>Edit catatan</h2>
-        <div><label>Catatan</label><textarea id="note-input" rows="3" style="width:100%;resize:vertical">${escHtml(b.note||'')}</textarea></div>
-        <div><label>Kategori</label><input id="cat-input" type="text" value="${escHtml(b.category||'')}" /></div>
-        <div class="modal-actions">
-          <button onclick="closeModal()">Batal</button>
-          <button onclick="saveNote('${id}')">Simpan ↗</button>
-        </div>
-      </div>
-    </div>`;
-}
+/* EVENTS */
 
-async function saveNote(id) {
-  const b = bookmarks.find(x => x.id === id);
-  if (!b) return;
-  b.note = document.getElementById('note-input').value;
-  b.category = document.getElementById('cat-input').value || b.category;
-  closeModal();
-  await saveData();
-  renderAll();
-}
+document
+  .getElementById("add-btn")
+  .addEventListener(
+    "click",
+    handleAdd
+  );
 
-function closeModal() { document.getElementById('modal').style.display = 'none'; }
+document
+  .getElementById("url-input")
+  .addEventListener(
+    "keydown",
+    e => {
+      if(e.key === "Enter"){
+        handleAdd();
+      }
+    }
+  );
 
-async function deleteBookmark(id) {
-  bookmarks = bookmarks.filter(x => x.id !== id);
-  await saveData();
-  renderAll();
-}
-
-document.getElementById('url-input').addEventListener('keydown', e => { if(e.key==='Enter') handleAdd(); });
+/* INIT */
 
 loadData();
+
 </script>
+
+</body>
+</html>
