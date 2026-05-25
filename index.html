@@ -377,10 +377,6 @@ PREVIEW
 
   width:100%;
 
-  aspect-ratio:16/10;
-
-  max-height:180px;
-
   overflow:hidden;
 
   background:#1c
@@ -388,9 +384,9 @@ PREVIEW
 
 .card-preview.portrait{
 
-  aspect-ratio:9/16;
+  aspect-ratio:4/6;
 
-  max-height:320px;
+  max-height:260px;
 
 }
 
@@ -402,10 +398,13 @@ PREVIEW
   object-fit:cover;
 
   display:block;
+  object-position:center;
 
   transition:.45s ease;
 
 }
+
+
 
 .card:hover .card-preview img{
   transform:scale(1.04);
