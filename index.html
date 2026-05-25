@@ -1,6 +1,26 @@
+<!--
+========================================
+LINKKU — FINAL PRODUCTION VERSION
+Visual Bookmark Manager
+========================================
+FEATURES:
+- Beautiful modern UI
+- TikTok/Reels/YouTube thumbnails
+- Compact visual cards
+- Responsive
+- Search
+- Category filters
+- LocalStorage
+- Hover animations
+- Production-ready CSS
+- Masonry-style layout
+========================================
+-->
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
+
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -11,24 +31,25 @@
   href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"
 />
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+  rel="stylesheet"
+/>
 
 <style>
 
-/* =========================
-   ROOT
-========================= */
+/* ====================================
+ROOT
+==================================== */
 
 :root{
 
-  --bg:#0d0d0f;
+  --bg:#070709;
 
-  --surface:#17171a;
-  --surface-hover:#1d1d22;
+  --surface:#131316;
+  --surface-hover:#1b1b20;
 
-  --border:#29292f;
+  --border:#26262d;
 
   --text:#fafafa;
   --text-secondary:#a1a1aa;
@@ -37,19 +58,17 @@
   --radius-xl:28px;
   --radius-lg:22px;
   --radius-md:18px;
-  --radius-sm:14px;
 
   --transition:.22s ease;
 
   --shadow:
-    0 1px 1px rgba(0,0,0,.4),
-    0 20px 40px rgba(0,0,0,.35);
+    0 10px 40px rgba(0,0,0,.35);
 
 }
 
-/* =========================
-   RESET
-========================= */
+/* ====================================
+RESET
+==================================== */
 
 *{
   margin:0;
@@ -64,6 +83,7 @@ body{
 }
 
 body{
+
   background:var(--bg);
   color:var(--text);
 
@@ -73,26 +93,27 @@ body{
     sans-serif;
 
   -webkit-font-smoothing:antialiased;
+
 }
 
-/* =========================
-   APP
-========================= */
+/* ====================================
+APP
+==================================== */
 
 #app{
 
   width:100%;
-  max-width:1550px;
+  max-width:1600px;
 
   margin:auto;
 
-  padding:40px 24px 90px;
+  padding:34px 26px 80px;
 
 }
 
-/* =========================
-   HEADER
-========================= */
+/* ====================================
+HEADER
+==================================== */
 
 .header{
 
@@ -100,7 +121,7 @@ body{
   align-items:center;
   justify-content:space-between;
 
-  margin-bottom:34px;
+  margin-bottom:30px;
 
 }
 
@@ -110,7 +131,7 @@ body{
   align-items:center;
   gap:14px;
 
-  font-size:54px;
+  font-size:52px;
   font-weight:800;
 
   letter-spacing:-2px;
@@ -118,31 +139,34 @@ body{
 }
 
 .logo i{
-  font-size:42px;
+  font-size:40px;
 }
 
 #count-badge{
+
   color:var(--text-secondary);
+
   font-size:14px;
+
 }
 
-/* =========================
-   INPUT BAR
-========================= */
+/* ====================================
+ADD BAR
+==================================== */
 
 .add-bar{
 
   display:flex;
   gap:16px;
 
-  margin-bottom:28px;
+  margin-bottom:24px;
 
 }
 
 .input{
 
   width:100%;
-  height:74px;
+  height:72px;
 
   border:none;
   outline:none;
@@ -157,7 +181,7 @@ body{
 
   color:white;
 
-  font-size:18px;
+  font-size:17px;
 
   transition:var(--transition);
 
@@ -168,20 +192,23 @@ body{
 }
 
 .input:focus{
-  background:#1d1d22;
+
   border-color:#3b3b45;
+
+  background:#1a1a20;
+
 }
 
 .primary-btn{
 
-  height:74px;
+  height:72px;
 
   border:none;
   outline:none;
 
   background:transparent;
 
-  border:1px solid #3a3a40;
+  border:1px solid #36363d;
 
   border-radius:24px;
 
@@ -193,7 +220,7 @@ body{
   align-items:center;
   gap:10px;
 
-  font-size:18px;
+  font-size:17px;
   font-weight:600;
 
   cursor:pointer;
@@ -206,15 +233,15 @@ body{
 
 .primary-btn:hover{
 
-  background:#202027;
+  background:#1d1d24;
 
   transform:translateY(-1px);
 
 }
 
-/* =========================
-   FILTER
-========================= */
+/* ====================================
+FILTERS
+==================================== */
 
 .filters{
 
@@ -224,7 +251,7 @@ body{
 
   flex-wrap:wrap;
 
-  margin-bottom:38px;
+  margin-bottom:34px;
 
 }
 
@@ -241,28 +268,30 @@ body{
 
   color:var(--text-secondary);
 
-  padding:14px 22px;
+  padding:12px 18px;
+
+  font-size:14px;
+  font-weight:500;
 
   cursor:pointer;
 
   transition:var(--transition);
 
-  font-size:15px;
-  font-weight:500;
-
 }
 
 .tag-pill:hover{
 
-  background:#1d1d22;
+  background:#1b1b22;
+
   color:white;
 
 }
 
 .tag-pill.active{
 
-  background:#202027;
-  border-color:#3a3a40;
+  background:#22222a;
+
+  border-color:#3a3a45;
 
   color:white;
 
@@ -274,8 +303,8 @@ body{
 
 .search-input{
 
-  width:340px;
-  height:58px;
+  width:280px;
+  height:54px;
 
   border:none;
   outline:none;
@@ -290,36 +319,33 @@ body{
 
   color:white;
 
-  font-size:15px;
+  font-size:14px;
 
 }
 
-/* =========================
-   GRID
-========================= */
+/* ====================================
+MASONRY LAYOUT
+==================================== */
 
 .cards{
 
-  display:grid;
+  columns:4 280px;
 
-  grid-template-columns:
-    repeat(auto-fill,minmax(360px,1fr));
-
-  gap:20px;
+  column-gap:18px;
 
 }
 
-/* =========================
-   CARD
-========================= */
-
 .card{
+
+  break-inside:avoid;
+
+  margin-bottom:18px;
 
   background:var(--surface);
 
   border:1px solid var(--border);
 
-  border-radius:var(--radius-xl);
+  border-radius:26px;
 
   overflow:hidden;
 
@@ -335,24 +361,33 @@ body{
 
   background:var(--surface-hover);
 
-  border-color:#393942;
+  border-color:#383845;
 
 }
 
-/* =========================
-   PREVIEW
-========================= */
+/* ====================================
+PREVIEW
+==================================== */
 
 .card-preview{
 
-  width:100%;
-  height:220px;
-
   position:relative;
+
+  width:100%;
+
+  aspect-ratio:16/9;
 
   overflow:hidden;
 
-  background:#1f1f25;
+  background:#1c1c21;
+
+}
+
+.card-preview.portrait{
+
+  aspect-ratio:9/16;
+
+  max-height:430px;
 
 }
 
@@ -365,12 +400,12 @@ body{
 
   display:block;
 
-  transition:.5s ease;
+  transition:.45s ease;
 
 }
 
 .card:hover .card-preview img{
-  transform:scale(1.05);
+  transform:scale(1.04);
 }
 
 .card-preview::after{
@@ -383,11 +418,16 @@ body{
   background:
     linear-gradient(
       to top,
-      rgba(0,0,0,.4),
+      rgba(0,0,0,.6),
+      rgba(0,0,0,.1),
       transparent
     );
 
 }
+
+/* ====================================
+OVERLAY
+==================================== */
 
 .preview-overlay{
 
@@ -398,18 +438,18 @@ body{
   align-items:center;
   justify-content:center;
 
-  z-index:2;
+  z-index:3;
 
 }
 
 .play-btn{
 
-  width:72px;
-  height:72px;
+  width:68px;
+  height:68px;
 
   border-radius:999px;
 
-  background:rgba(255,255,255,.15);
+  background:rgba(255,255,255,.14);
 
   backdrop-filter:blur(10px);
 
@@ -423,30 +463,87 @@ body{
 
 }
 
-/* =========================
-   BODY
-========================= */
+/* ====================================
+TEXT OVERLAY
+==================================== */
+
+.preview-info{
+
+  position:absolute;
+
+  left:0;
+  right:0;
+  bottom:0;
+
+  z-index:4;
+
+  padding:18px;
+
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+
+}
+
+.preview-title{
+
+  font-size:15px;
+  font-weight:700;
+
+  line-height:1.45;
+
+  color:white;
+
+  display:-webkit-box;
+
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+
+  overflow:hidden;
+
+}
+
+.preview-desc{
+
+  color:rgba(255,255,255,.8);
+
+  font-size:13px;
+
+  line-height:1.5;
+
+  display:-webkit-box;
+
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+
+  overflow:hidden;
+
+}
+
+/* ====================================
+CARD BODY
+==================================== */
 
 .card-body{
-  padding:22px;
+  padding:18px;
 }
 
 .card-top{
 
   display:flex;
-  align-items:flex-start;
-  gap:14px;
+  align-items:center;
+  gap:12px;
 
-  margin-bottom:18px;
+  margin-bottom:14px;
 
 }
 
 .favicon{
 
-  width:46px;
-  height:46px;
+  width:42px;
+  height:42px;
 
-  border-radius:14px;
+  border-radius:12px;
 
   object-fit:cover;
 
@@ -456,35 +553,22 @@ body{
 
 .favicon-placeholder{
 
-  width:46px;
-  height:46px;
+  width:42px;
+  height:42px;
 
-  border-radius:14px;
+  border-radius:12px;
 
-  background:#24242a;
+  background:#202026;
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  color:#8b8b93;
-
-  flex-shrink:0;
-
-}
-
-.card-title{
-
-  font-size:19px;
-  font-weight:700;
-
-  line-height:1.4;
+  color:#8a8a94;
 
 }
 
 .card-url{
-
-  margin-top:5px;
 
   color:var(--text-muted);
 
@@ -496,25 +580,15 @@ body{
 
 }
 
-.card-summary{
-
-  color:#b5b5bd;
-
-  line-height:1.7;
-
-  font-size:14px;
-
-  margin-bottom:18px;
-
-}
+/* ====================================
+BADGES
+==================================== */
 
 .card-tags{
 
   display:flex;
   flex-wrap:wrap;
   gap:8px;
-
-  margin-bottom:18px;
 
 }
 
@@ -524,24 +598,28 @@ body{
 
   border-radius:999px;
 
-  background:#30303a;
+  background:#262630;
 
   color:white;
 
   font-size:12px;
   font-weight:600;
 
+  text-transform:capitalize;
+
 }
 
-/* =========================
-   FOOTER
-========================= */
+/* ====================================
+FOOTER
+==================================== */
 
 .card-footer{
 
   display:flex;
   align-items:center;
   justify-content:space-between;
+
+  margin-top:18px;
 
 }
 
@@ -551,9 +629,9 @@ body{
   align-items:center;
   gap:6px;
 
-  text-decoration:none;
+  color:#d4d4da;
 
-  color:#d4d4d8;
+  text-decoration:none;
 
   font-size:14px;
 
@@ -561,13 +639,6 @@ body{
 
 .card-footer a:hover{
   color:white;
-}
-
-.card-actions{
-
-  display:flex;
-  gap:8px;
-
 }
 
 .icon-btn{
@@ -581,39 +652,40 @@ body{
 
   background:transparent;
 
-  color:#91919a;
+  color:#8d8d97;
 
   cursor:pointer;
 
   transition:var(--transition);
 
-  font-size:17px;
+  font-size:16px;
 
 }
 
 .icon-btn:hover{
 
-  background:#25252c;
+  background:#24242d;
+
   color:white;
 
 }
 
-/* =========================
-   EMPTY
-========================= */
+/* ====================================
+EMPTY
+==================================== */
 
 .empty{
 
-  grid-column:1/-1;
+  width:100%;
 
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
 
-  padding:120px 20px;
-
   text-align:center;
+
+  padding:120px 20px;
 
   color:var(--text-secondary);
 
@@ -623,7 +695,7 @@ body{
 
   font-size:64px;
 
-  margin-bottom:18px;
+  margin-bottom:16px;
 
 }
 
@@ -631,133 +703,37 @@ body{
 
   font-size:30px;
 
-  margin-bottom:10px;
-
-}
-
-/* =========================
-   MODAL
-========================= */
-
-.modal-overlay{
-
-  position:fixed;
-  inset:0;
-
-  background:rgba(0,0,0,.7);
-
-  backdrop-filter:blur(10px);
-
-  z-index:999;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  padding:20px;
-
-}
-
-.modal{
-
-  width:100%;
-  max-width:460px;
-
-  background:#18181d;
-
-  border:1px solid #2d2d35;
-
-  border-radius:32px;
-
-  padding:30px;
-
-  display:flex;
-  flex-direction:column;
-  gap:18px;
-
-}
-
-.modal h2{
-  font-size:26px;
-}
-
-.modal label{
-
-  display:block;
-
   margin-bottom:8px;
 
-  color:#a1a1aa;
+}
 
-  font-size:14px;
+/* ====================================
+LOADING
+==================================== */
+
+.loading{
+
+  animation:pulse 1.2s infinite;
 
 }
 
-.modal textarea,
-.modal input{
+@keyframes pulse{
 
-  width:100%;
+  0%,100%{
+    opacity:1;
+  }
 
-  border:none;
-  outline:none;
-
-  background:#202027;
-
-  border:1px solid #32323a;
-
-  border-radius:16px;
-
-  padding:16px;
-
-  color:white;
-
-  font-size:14px;
+  50%{
+    opacity:.45;
+  }
 
 }
 
-.modal-actions{
+/* ====================================
+RESPONSIVE
+==================================== */
 
-  display:flex;
-  justify-content:flex-end;
-  gap:12px;
-
-}
-
-.modal-btn{
-
-  height:50px;
-
-  border:none;
-
-  border-radius:16px;
-
-  padding:0 18px;
-
-  font-weight:600;
-
-  cursor:pointer;
-
-}
-
-.btn-secondary{
-
-  background:#25252d;
-  color:white;
-
-}
-
-.btn-primary{
-
-  background:white;
-  color:black;
-
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width:768px){
+@media(max-width:768px){
 
   #app{
     padding:24px 16px 70px;
@@ -789,10 +765,6 @@ body{
     width:100%;
   }
 
-  .cards{
-    grid-template-columns:1fr;
-  }
-
 }
 
 </style>
@@ -801,6 +773,8 @@ body{
 <body>
 
 <div id="app">
+
+  <!-- HEADER -->
 
   <div class="header">
 
@@ -814,6 +788,8 @@ body{
     </span>
 
   </div>
+
+  <!-- ADD -->
 
   <div class="add-bar">
 
@@ -834,10 +810,14 @@ body{
 
   </div>
 
+  <!-- FILTER -->
+
   <div
     class="filters"
     id="filters"
   ></div>
+
+  <!-- CARDS -->
 
   <div
     class="cards"
@@ -846,51 +826,22 @@ body{
 
 </div>
 
-<div id="modal"></div>
-
 <script>
 
-/* =========================
-   STORAGE
-========================= */
+/* ====================================
+STATE
+==================================== */
 
 const STORAGE_KEY =
-  "linkku_visual_v1";
+  "linkku_visual_final";
 
 let bookmarks = [];
+
 let activeCategory = "all";
 
-/* =========================
-   STORAGE METHODS
-========================= */
-
-function saveData(){
-
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify(bookmarks)
-  );
-
-}
-
-function loadData(){
-
-  const raw =
-    localStorage.getItem(STORAGE_KEY);
-
-  if(raw){
-
-    bookmarks = JSON.parse(raw);
-
-  }
-
-  renderAll();
-
-}
-
-/* =========================
-   HELPERS
-========================= */
+/* ====================================
+HELPERS
+==================================== */
 
 function escHtml(str=""){
 
@@ -943,16 +894,18 @@ function detectPlatform(url){
     return "youtube";
   }
 
-  if(url.includes("tiktok.com")){
-    return "tiktok";
-  }
-
   if(url.includes("instagram.com")){
     return "instagram";
   }
 
-  if(url.includes("twitter.com") ||
-     url.includes("x.com")){
+  if(url.includes("tiktok.com")){
+    return "tiktok";
+  }
+
+  if(
+    url.includes("twitter.com") ||
+    url.includes("x.com")
+  ){
     return "twitter";
   }
 
@@ -960,38 +913,66 @@ function detectPlatform(url){
 
 }
 
-/* =========================
-   FETCH PREVIEW
-========================= */
+/* ====================================
+LOCAL STORAGE
+==================================== */
+
+function saveData(){
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(bookmarks)
+  );
+
+}
+
+function loadData(){
+
+  const raw =
+    localStorage.getItem(STORAGE_KEY);
+
+  if(raw){
+
+    bookmarks = JSON.parse(raw);
+
+  }
+
+  renderAll();
+
+}
+
+/* ====================================
+FETCH PREVIEW
+==================================== */
 
 async function getLinkPreview(url){
 
   try{
 
-    const response =
+    const res =
       await fetch(
         `https://api.microlink.io/?url=${encodeURIComponent(url)}`
       );
 
-    const result =
-      await response.json();
+    const data =
+      await res.json();
 
     return {
 
       title:
-        result.data?.title ||
+        data.data?.title ||
         getDomain(url),
 
       summary:
-        result.data?.description ||
+        data.data?.description ||
         "",
 
       thumbnail:
-        result.data?.image?.url ||
+        data.data?.image?.url ||
         "",
 
       favicon:
-        result.data?.logo?.url ||
+        data.data?.logo?.url ||
         getFavicon(url)
 
     };
@@ -1003,7 +984,9 @@ async function getLinkPreview(url){
       title:getDomain(url),
 
       summary:"",
+
       thumbnail:"",
+
       favicon:getFavicon(url)
 
     };
@@ -1012,14 +995,16 @@ async function getLinkPreview(url){
 
 }
 
-/* =========================
-   ADD BOOKMARK
-========================= */
+/* ====================================
+ADD
+==================================== */
 
 async function handleAdd(){
 
   const input =
-    document.getElementById("url-input");
+    document.getElementById(
+      "url-input"
+    );
 
   let url =
     input.value.trim();
@@ -1027,22 +1012,21 @@ async function handleAdd(){
   if(!url) return;
 
   if(!/^https?:\/\//i.test(url)){
+
     url = "https://" + url;
+
   }
 
   input.value = "";
 
-  const tempId =
-    crypto.randomUUID();
-
-  showLoadingCard(tempId);
+  renderLoading();
 
   const preview =
     await getLinkPreview(url);
 
   bookmarks.unshift({
 
-    id:tempId,
+    id:crypto.randomUUID(),
 
     url,
 
@@ -1050,9 +1034,9 @@ async function handleAdd(){
 
     summary:preview.summary,
 
-    favicon:preview.favicon,
-
     thumbnail:preview.thumbnail,
+
+    favicon:preview.favicon,
 
     category:
       detectPlatform(url),
@@ -1068,45 +1052,46 @@ async function handleAdd(){
 
 }
 
-/* =========================
-   LOADING
-========================= */
+/* ====================================
+LOADING
+==================================== */
 
-function showLoadingCard(){
+function renderLoading(){
 
-  const container =
-    document.getElementById(
+  document
+    .getElementById(
       "cards-container"
-    );
+    )
+    .innerHTML = `
 
-  container.innerHTML = `
+      <div class="card loading">
 
-    <div class="card">
+        <div class="card-preview"></div>
 
-      <div class="card-preview"></div>
+        <div class="card-body">
 
-      <div class="card-body">
+          <div class="preview-title">
+            Mengambil preview...
+          </div>
 
-        <div class="card-summary">
-          Mengambil preview...
         </div>
 
       </div>
 
-    </div>
-
-  `;
+    `;
 
 }
 
-/* =========================
-   DELETE
-========================= */
+/* ====================================
+DELETE
+==================================== */
 
 function deleteBookmark(id){
 
   const ok =
-    confirm("Hapus bookmark ini?");
+    confirm(
+      "Hapus bookmark ini?"
+    );
 
   if(!ok) return;
 
@@ -1121,9 +1106,9 @@ function deleteBookmark(id){
 
 }
 
-/* =========================
-   FILTER
-========================= */
+/* ====================================
+FILTERS
+==================================== */
 
 function filterCat(cat){
 
@@ -1137,7 +1122,9 @@ function filterCat(cat){
 function renderFilters(){
 
   const wrap =
-    document.getElementById("filters");
+    document.getElementById(
+      "filters"
+    );
 
   const cats = [
 
@@ -1156,7 +1143,9 @@ function renderFilters(){
   cats.forEach(cat => {
 
     const btn =
-      document.createElement("button");
+      document.createElement(
+        "button"
+      );
 
     btn.className =
       "tag-pill" +
@@ -1199,9 +1188,9 @@ function renderFilters(){
 
 }
 
-/* =========================
-   RENDER
-========================= */
+/* ====================================
+RENDER
+==================================== */
 
 function renderCards(){
 
@@ -1213,8 +1202,9 @@ function renderCards(){
   const q =
     (
       document
-        .getElementById("search-input")
-        ?.value || ""
+        .getElementById(
+          "search-input"
+        )?.value || ""
     ).toLowerCase();
 
   let filtered = bookmarks;
@@ -1241,13 +1231,13 @@ function renderCards(){
 
           ||
 
-          b.url
+          b.summary
             .toLowerCase()
             .includes(q)
 
           ||
 
-          b.summary
+          b.url
             .toLowerCase()
             .includes(q)
 
@@ -1258,7 +1248,9 @@ function renderCards(){
   }
 
   document
-    .getElementById("count-badge")
+    .getElementById(
+      "count-badge"
+    )
     .innerText =
       `${filtered.length} link`;
 
@@ -1291,6 +1283,10 @@ function renderCards(){
     const isVideo =
       b.category !== "website";
 
+    const isPortrait =
+      b.category === "instagram" ||
+      b.category === "tiktok";
+
     const card =
       document.createElement("div");
 
@@ -1306,12 +1302,11 @@ function renderCards(){
           <a
             href="${escHtml(b.url)}"
             target="_blank"
-            class="card-preview"
+            class="card-preview ${isPortrait ? "portrait" : ""}"
           >
 
             <img
               src="${escHtml(b.thumbnail)}"
-              alt=""
               loading="lazy"
             />
 
@@ -1327,9 +1322,27 @@ function renderCards(){
 
                 </div>
               `
-
               : ""
             }
+
+            <div class="preview-info">
+
+              <div class="preview-title">
+                ${escHtml(b.title)}
+              </div>
+
+              ${
+                b.summary
+
+                ? `
+                  <div class="preview-desc">
+                    ${escHtml(b.summary)}
+                  </div>
+                `
+                : ""
+              }
+
+            </div>
 
           </a>
 
@@ -1351,7 +1364,6 @@ function renderCards(){
                 src="${escHtml(b.favicon)}"
               />
             `
-
             : `
               <div class="favicon-placeholder">
                 <i class="ti ti-world"></i>
@@ -1361,10 +1373,6 @@ function renderCards(){
 
           <div style="min-width:0">
 
-            <div class="card-title">
-              ${escHtml(b.title)}
-            </div>
-
             <div class="card-url">
               ${escHtml(getDomain(b.url))}
             </div>
@@ -1372,18 +1380,6 @@ function renderCards(){
           </div>
 
         </div>
-
-        ${
-          b.summary
-
-          ? `
-            <div class="card-summary">
-              ${escHtml(b.summary)}
-            </div>
-          `
-
-          : ""
-        }
 
         <div class="card-tags">
 
@@ -1403,16 +1399,12 @@ function renderCards(){
             Buka
           </a>
 
-          <div class="card-actions">
-
-            <button
-              class="icon-btn"
-              onclick="deleteBookmark('${b.id}')"
-            >
-              <i class="ti ti-trash"></i>
-            </button>
-
-          </div>
+          <button
+            class="icon-btn"
+            onclick="deleteBookmark('${b.id}')"
+          >
+            <i class="ti ti-trash"></i>
+          </button>
 
         </div>
 
@@ -1433,9 +1425,9 @@ function renderAll(){
 
 }
 
-/* =========================
-   EVENTS
-========================= */
+/* ====================================
+EVENTS
+==================================== */
 
 document
   .getElementById("add-btn")
@@ -1451,15 +1443,17 @@ document
     e => {
 
       if(e.key === "Enter"){
+
         handleAdd();
+
       }
 
     }
   );
 
-/* =========================
-   INIT
-========================= */
+/* ====================================
+INIT
+==================================== */
 
 loadData();
 
