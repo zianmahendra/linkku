@@ -2,9 +2,9 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>Linkku — Bookmark Manager</title>
+<title>Linkku — Smart Bookmark Manager</title>
 
 <link
   rel="stylesheet"
@@ -12,32 +12,34 @@
 />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
 :root{
-  --bg:#0f0f10;
-  --surface:#171717;
-  --surface-hover:#1d1d1d;
+  --bg:#0d0d0f;
+  --surface:#17171a;
+  --surface-hover:#1d1d22;
 
-  --border:#2b2b2b;
+  --border:#29292f;
 
-  --text:#f5f5f5;
+  --text:#fafafa;
   --text-secondary:#a1a1aa;
   --text-muted:#71717a;
 
   --primary:#ffffff;
 
-  --radius:22px;
-  --radius-md:16px;
-  --radius-sm:12px;
-
-  --transition:.2s ease;
+  --radius-xl:28px;
+  --radius-lg:22px;
+  --radius-md:18px;
+  --radius-sm:14px;
 
   --shadow:
-    0 1px 1px rgba(0,0,0,.4),
-    0 10px 40px rgba(0,0,0,.35);
+    0 1px 1px rgba(0,0,0,.35),
+    0 20px 40px rgba(0,0,0,.35);
+
+  --transition:.22s ease;
 }
 
 *{
@@ -68,11 +70,11 @@ body{
 
 #app{
   width:100%;
-  max-width:1500px;
+  max-width:1550px;
 
   margin:auto;
 
-  padding:40px 28px 80px;
+  padding:38px 26px 90px;
 }
 
 /* HEADER */
@@ -82,21 +84,22 @@ body{
   align-items:center;
   justify-content:space-between;
 
-  margin-bottom:30px;
+  margin-bottom:32px;
 }
 
 .logo{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:14px;
 
-  font-size:48px;
-  font-weight:700;
+  font-size:52px;
+  font-weight:800;
+
   letter-spacing:-2px;
 }
 
 .logo i{
-  font-size:40px;
+  font-size:42px;
 }
 
 #count-badge{
@@ -110,25 +113,27 @@ body{
   display:flex;
   gap:16px;
 
-  margin-bottom:26px;
+  margin-bottom:28px;
 }
 
 .input{
   width:100%;
-  height:72px;
+  height:74px;
 
-  border-radius:20px;
-  border:1px solid var(--border);
+  border:none;
+  outline:none;
 
   background:var(--surface);
 
-  color:var(--text);
+  border:1px solid var(--border);
 
-  padding:0 24px;
+  border-radius:24px;
+
+  padding:0 26px;
+
+  color:white;
 
   font-size:18px;
-
-  outline:none;
 
   transition:var(--transition);
 }
@@ -138,23 +143,29 @@ body{
 }
 
 .input:focus{
-  border-color:#444;
-  background:#1c1c1c;
+  border-color:#3f3f46;
+  background:#1d1d22;
 }
 
 .primary-btn{
-  height:72px;
+  height:74px;
 
   border:none;
+  outline:none;
 
   background:transparent;
+
+  border:1px solid #3a3a40;
+
   color:white;
 
-  border:1px solid #3a3a3a;
+  border-radius:24px;
 
-  padding:0 26px;
+  padding:0 28px;
 
-  border-radius:20px;
+  display:flex;
+  align-items:center;
+  gap:10px;
 
   font-size:18px;
   font-weight:600;
@@ -163,15 +174,11 @@ body{
 
   transition:var(--transition);
 
-  display:flex;
-  align-items:center;
-  gap:10px;
-
   flex-shrink:0;
 }
 
 .primary-btn:hover{
-  background:#202020;
+  background:#202027;
   transform:translateY(-1px);
 }
 
@@ -182,13 +189,14 @@ body{
   align-items:center;
   gap:12px;
 
-  margin-bottom:34px;
-
   flex-wrap:wrap;
+
+  margin-bottom:36px;
 }
 
 .tag-pill{
   border:none;
+  outline:none;
 
   background:transparent;
 
@@ -196,27 +204,27 @@ body{
 
   color:var(--text-secondary);
 
+  border-radius:999px;
+
   padding:14px 22px;
 
-  border-radius:999px;
+  cursor:pointer;
 
   font-size:15px;
   font-weight:500;
-
-  cursor:pointer;
 
   transition:var(--transition);
 }
 
 .tag-pill:hover{
-  background:#1e1e1e;
+  background:#1d1d22;
   color:white;
 }
 
 .tag-pill.active{
-  background:#202020;
+  background:#202027;
   color:white;
-  border-color:#3a3a3a;
+  border-color:#3a3a40;
 }
 
 .search-wrap{
@@ -225,22 +233,22 @@ body{
 
 .search-input{
   width:340px;
-  height:60px;
+  height:58px;
 
   border:none;
   outline:none;
-
-  border-radius:18px;
 
   background:var(--surface);
 
   border:1px solid var(--border);
 
+  border-radius:18px;
+
+  padding:0 18px;
+
   color:white;
 
-  padding:0 20px;
-
-  font-size:16px;
+  font-size:15px;
 }
 
 /* GRID */
@@ -249,9 +257,9 @@ body{
   display:grid;
 
   grid-template-columns:
-    repeat(auto-fill,minmax(340px,1fr));
+    repeat(auto-fill,minmax(360px,1fr));
 
-  gap:18px;
+  gap:20px;
 }
 
 /* CARD */
@@ -261,35 +269,95 @@ body{
 
   border:1px solid var(--border);
 
-  border-radius:var(--radius);
+  border-radius:var(--radius-xl);
 
-  padding:22px;
+  overflow:hidden;
 
   transition:var(--transition);
 
   box-shadow:var(--shadow);
-
-  display:flex;
-  flex-direction:column;
-
-  gap:18px;
 }
 
 .card:hover{
-  transform:translateY(-3px);
-  border-color:#3a3a3a;
+  transform:translateY(-4px);
   background:var(--surface-hover);
+  border-color:#393942;
 }
+
+.card-body{
+  padding:22px;
+}
+
+/* PREVIEW */
+
+.card-preview{
+  width:100%;
+  height:220px;
+
+  position:relative;
+
+  overflow:hidden;
+
+  background:#1f1f25;
+}
+
+.card-preview img{
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  display:block;
+}
+
+.preview-overlay{
+  position:absolute;
+  inset:0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0,0,0,.45),
+      rgba(0,0,0,.1)
+    );
+}
+
+.play-btn{
+  width:72px;
+  height:72px;
+
+  border-radius:999px;
+
+  background:rgba(255,255,255,.18);
+
+  backdrop-filter:blur(8px);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  color:white;
+
+  font-size:28px;
+}
+
+/* TOP */
 
 .card-top{
   display:flex;
   align-items:flex-start;
   gap:14px;
+
+  margin-bottom:18px;
 }
 
 .favicon{
-  width:44px;
-  height:44px;
+  width:46px;
+  height:46px;
 
   border-radius:14px;
 
@@ -299,25 +367,25 @@ body{
 }
 
 .favicon-placeholder{
-  width:44px;
-  height:44px;
+  width:46px;
+  height:46px;
 
   border-radius:14px;
+
+  background:#24242a;
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  background:#232323;
-
-  color:#888;
+  color:#8b8b93;
 
   flex-shrink:0;
 }
 
 .card-title{
-  font-size:18px;
-  font-weight:600;
+  font-size:19px;
+  font-weight:700;
 
   line-height:1.4;
 }
@@ -325,75 +393,85 @@ body{
 .card-url{
   margin-top:5px;
 
-  font-size:13px;
-
   color:var(--text-muted);
+
+  font-size:13px;
 
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
 }
 
+/* CONTENT */
+
 .card-summary{
-  color:#b4b4b4;
+  color:#b5b5bd;
+
+  line-height:1.7;
 
   font-size:14px;
 
-  line-height:1.7;
+  margin-bottom:16px;
 }
 
 .card-note{
-  font-size:14px;
+  color:#ececec;
 
   line-height:1.7;
 
-  color:#e5e5e5;
+  font-size:14px;
+
+  margin-bottom:16px;
 }
+
+/* TAGS */
 
 .card-tags{
   display:flex;
   flex-wrap:wrap;
   gap:8px;
+
+  margin-bottom:18px;
 }
 
 .tag,
 .cat-badge{
-  font-size:12px;
-  font-weight:500;
-
   padding:7px 12px;
 
   border-radius:999px;
+
+  font-size:12px;
+  font-weight:600;
 }
 
 .tag{
-  background:#242424;
-  color:#b0b0b0;
+  background:#24242a;
+  color:#b4b4bc;
 }
 
 .cat-badge{
-  background:#2d2d2d;
+  background:#30303a;
   color:white;
 }
 
-.card-footer{
-  margin-top:auto;
+/* FOOTER */
 
+.card-footer{
   display:flex;
   align-items:center;
   justify-content:space-between;
 }
 
 .card-footer a{
+  display:flex;
+  align-items:center;
+  gap:6px;
+
   text-decoration:none;
 
   color:#d4d4d8;
 
   font-size:14px;
-
-  display:flex;
-  align-items:center;
-  gap:6px;
 }
 
 .card-footer a:hover{
@@ -406,26 +484,26 @@ body{
 }
 
 .icon-btn{
-  width:38px;
-  height:38px;
+  width:40px;
+  height:40px;
 
   border:none;
 
-  border-radius:12px;
+  border-radius:14px;
 
   background:transparent;
 
-  color:#8b8b8b;
+  color:#91919a;
 
   cursor:pointer;
 
-  transition:var(--transition);
-
   font-size:17px;
+
+  transition:var(--transition);
 }
 
 .icon-btn:hover{
-  background:#252525;
+  background:#25252c;
   color:white;
 }
 
@@ -441,50 +519,23 @@ body{
 
   padding:120px 20px;
 
-  color:var(--text-secondary);
-
   text-align:center;
+
+  color:var(--text-secondary);
 }
 
 .empty i{
-  font-size:58px;
-  margin-bottom:16px;
+  font-size:64px;
+  margin-bottom:18px;
 }
 
 .empty h3{
-  font-size:26px;
-  margin-bottom:10px;
+  font-size:30px;
+  margin-bottom:12px;
 }
 
 .empty p{
   font-size:15px;
-}
-
-/* LOADING */
-
-.loading-card{
-  background:#181818;
-
-  border:1px solid var(--border);
-
-  border-radius:var(--radius);
-
-  padding:24px;
-
-  display:flex;
-  align-items:center;
-  gap:12px;
-
-  color:#b0b0b0;
-}
-
-.pulse{
-  animation:pulse 1.2s infinite;
-}
-
-@keyframes pulse{
-  0%,100%{opacity:1}
-  50%{opacity:.45}
 }
 
 /* MODAL */
@@ -493,27 +544,30 @@ body{
   position:fixed;
   inset:0;
 
-  background:rgba(0,0,0,.6);
+  background:rgba(0,0,0,.72);
 
-  backdrop-filter:blur(8px);
+  backdrop-filter:blur(10px);
+
+  z-index:999;
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  z-index:999;
+  padding:20px;
 }
 
 .modal{
-  width:420px;
+  width:100%;
+  max-width:460px;
 
-  background:#181818;
+  background:#18181d;
 
-  border:1px solid #2b2b2b;
+  border:1px solid #2d2d35;
 
-  border-radius:28px;
+  border-radius:32px;
 
-  padding:28px;
+  padding:30px;
 
   display:flex;
   flex-direction:column;
@@ -521,7 +575,7 @@ body{
 }
 
 .modal h2{
-  font-size:24px;
+  font-size:26px;
 }
 
 .modal label{
@@ -529,7 +583,7 @@ body{
 
   margin-bottom:8px;
 
-  color:#9ca3af;
+  color:#a1a1aa;
 
   font-size:14px;
 }
@@ -541,15 +595,15 @@ body{
   border:none;
   outline:none;
 
-  background:#202020;
+  background:#202027;
 
-  border:1px solid #303030;
+  border:1px solid #32323a;
 
-  border-radius:14px;
+  border-radius:16px;
+
+  padding:16px;
 
   color:white;
-
-  padding:14px 16px;
 
   font-size:14px;
 }
@@ -561,21 +615,21 @@ body{
 }
 
 .modal-btn{
-  height:48px;
+  height:50px;
 
   border:none;
 
-  border-radius:14px;
+  border-radius:16px;
 
   padding:0 18px;
 
-  cursor:pointer;
-
   font-weight:600;
+
+  cursor:pointer;
 }
 
 .btn-secondary{
-  background:#252525;
+  background:#25252d;
   color:white;
 }
 
@@ -589,11 +643,11 @@ body{
 @media (max-width:768px){
 
   #app{
-    padding:24px 18px 60px;
+    padding:24px 16px 70px;
   }
 
   .logo{
-    font-size:34px;
+    font-size:36px;
   }
 
   .logo i{
@@ -632,6 +686,7 @@ body{
 <div id="app">
 
   <div class="header">
+
     <div class="logo">
       <i class="ti ti-bookmark"></i>
       Linkku
@@ -640,9 +695,11 @@ body{
     <span id="count-badge">
       0 link
     </span>
+
   </div>
 
   <div class="add-bar">
+
     <input
       id="url-input"
       class="input"
@@ -657,27 +714,13 @@ body{
       <i class="ti ti-plus"></i>
       Tambah ↗
     </button>
-  </div>
-
-  <div class="filters" id="filters">
-
-    <button
-      class="tag-pill active"
-      data-cat="all"
-    >
-      Semua
-    </button>
-
-    <div class="search-wrap">
-      <input
-        id="search-input"
-        class="search-input"
-        type="text"
-        placeholder="Cari..."
-      />
-    </div>
 
   </div>
+
+  <div
+    class="filters"
+    id="filters"
+  ></div>
 
   <div
     class="cards"
@@ -690,7 +733,7 @@ body{
 
 <script>
 
-const STORAGE_KEY = "linkku_bookmarks_v2";
+const STORAGE_KEY = "linkku_pro_v1";
 
 let bookmarks = [];
 let activeCategory = "all";
@@ -698,51 +741,154 @@ let activeCategory = "all";
 /* STORAGE */
 
 function saveData(){
+
   localStorage.setItem(
     STORAGE_KEY,
     JSON.stringify(bookmarks)
   );
+
 }
 
 function loadData(){
-  const raw = localStorage.getItem(STORAGE_KEY);
+
+  const raw =
+    localStorage.getItem(STORAGE_KEY);
 
   if(raw){
+
     bookmarks = JSON.parse(raw);
+
   }
 
   renderAll();
+
 }
 
 /* HELPERS */
 
 function escHtml(str=""){
+
   return str
     .replace(/&/g,"&amp;")
     .replace(/</g,"&lt;")
     .replace(/>/g,"&gt;")
     .replace(/"/g,"&quot;");
+
 }
 
 function getDomain(url){
+
   try{
+
     return new URL(url)
       .hostname
       .replace("www.","");
+
   }catch{
+
     return url;
+
   }
+
 }
 
 function getFavicon(url){
+
   try{
+
     const u = new URL(url);
 
-    return `https://www.google.com/s2/favicons?domain=${u.hostname}&sz=64`;
+    return `https://www.google.com/s2/favicons?domain=${u.hostname}&sz=128`;
 
   }catch{
+
     return "";
+
   }
+
+}
+
+function detectPlatform(url){
+
+  if(
+    url.includes("youtube.com") ||
+    url.includes("youtu.be")
+  ){
+    return "youtube";
+  }
+
+  if(url.includes("tiktok.com")){
+    return "tiktok";
+  }
+
+  if(url.includes("instagram.com")){
+    return "instagram";
+  }
+
+  return "website";
+
+}
+
+function getEmbedData(url){
+
+  const type =
+    detectPlatform(url);
+
+  /* YOUTUBE */
+
+  if(type === "youtube"){
+
+    try{
+
+      const u = new URL(url);
+
+      let id = "";
+
+      if(u.hostname.includes("youtu.be")){
+        id = u.pathname.slice(1);
+      }else{
+        id = u.searchParams.get("v");
+      }
+
+      return {
+        type,
+        thumbnail:
+          `https://img.youtube.com/vi/${id}/hqdefault.jpg`
+      };
+
+    }catch{}
+
+  }
+
+  /* TIKTOK */
+
+  if(type === "tiktok"){
+
+    return {
+      type,
+      thumbnail:
+        "https://placehold.co/800x500/111/FFF?text=TikTok"
+    };
+
+  }
+
+  /* INSTAGRAM */
+
+  if(type === "instagram"){
+
+    return {
+      type,
+      thumbnail:
+        "https://placehold.co/800x500/111/FFF?text=Instagram"
+    };
+
+  }
+
+  return {
+    type:"website",
+    thumbnail:""
+  };
+
 }
 
 /* ADD */
@@ -752,7 +898,8 @@ function handleAdd(){
   const input =
     document.getElementById("url-input");
 
-  let url = input.value.trim();
+  let url =
+    input.value.trim();
 
   if(!url) return;
 
@@ -760,16 +907,34 @@ function handleAdd(){
     url = "https://" + url;
   }
 
+  const embed =
+    getEmbedData(url);
+
   const bookmark = {
-    id: crypto.randomUUID(),
+
+    id:crypto.randomUUID(),
+
     url,
-    title: getDomain(url),
-    summary: "",
-    note: "",
-    category: "Umum",
-    tags: [],
-    favicon: getFavicon(url),
-    createdAt: new Date().toISOString()
+
+    title:getDomain(url),
+
+    summary:"",
+
+    note:"",
+
+    category:embed.type,
+
+    tags:[],
+
+    favicon:getFavicon(url),
+
+    previewType:embed.type,
+
+    thumbnail:embed.thumbnail,
+
+    createdAt:
+      new Date().toISOString()
+
   };
 
   bookmarks.unshift(bookmark);
@@ -779,15 +944,15 @@ function handleAdd(){
   input.value = "";
 
   renderAll();
+
 }
 
 /* DELETE */
 
 function deleteBookmark(id){
 
-  const ok = confirm(
-    "Hapus bookmark ini?"
-  );
+  const ok =
+    confirm("Hapus bookmark ini?");
 
   if(!ok) return;
 
@@ -799,6 +964,7 @@ function deleteBookmark(id){
   saveData();
 
   renderAll();
+
 }
 
 /* EDIT */
@@ -806,7 +972,9 @@ function deleteBookmark(id){
 function editNote(id){
 
   const b =
-    bookmarks.find(x => x.id === id);
+    bookmarks.find(
+      x => x.id === id
+    );
 
   if(!b) return;
 
@@ -814,6 +982,7 @@ function editNote(id){
     document.getElementById("modal");
 
   modal.innerHTML = `
+
     <div class="modal-overlay">
 
       <div class="modal">
@@ -821,21 +990,25 @@ function editNote(id){
         <h2>Edit Bookmark</h2>
 
         <div>
+
           <label>Catatan</label>
 
           <textarea
             id="note-input"
             rows="4"
           >${escHtml(b.note || "")}</textarea>
+
         </div>
 
         <div>
+
           <label>Kategori</label>
 
           <input
             id="cat-input"
             value="${escHtml(b.category || "")}"
           />
+
         </div>
 
         <div class="modal-actions">
@@ -859,34 +1032,44 @@ function editNote(id){
       </div>
 
     </div>
+
   `;
+
 }
 
 function closeModal(){
-  document.getElementById("modal")
+
+  document
+    .getElementById("modal")
     .innerHTML = "";
+
 }
 
 function saveNote(id){
 
   const b =
-    bookmarks.find(x => x.id === id);
+    bookmarks.find(
+      x => x.id === id
+    );
 
   if(!b) return;
 
   b.note =
-    document.getElementById("note-input")
+    document
+      .getElementById("note-input")
       .value;
 
   b.category =
-    document.getElementById("cat-input")
-      .value || "Umum";
+    document
+      .getElementById("cat-input")
+      .value || "website";
 
   saveData();
 
   closeModal();
 
   renderAll();
+
 }
 
 /* FILTER */
@@ -897,6 +1080,7 @@ function filterCat(cat){
 
   renderFilters();
   renderCards();
+
 }
 
 function renderFilters(){
@@ -941,7 +1125,7 @@ function renderFilters(){
   });
 
   const search =
-  document.createElement("div");
+    document.createElement("div");
 
   search.className =
     "search-wrap";
@@ -956,9 +1140,10 @@ function renderFilters(){
   `;
 
   wrap.appendChild(search);
+
 }
 
-/* CARDS */
+/* RENDER */
 
 function renderCards(){
 
@@ -977,10 +1162,12 @@ function renderCards(){
   let filtered = bookmarks;
 
   if(activeCategory !== "all"){
+
     filtered =
       filtered.filter(
         b => b.category === activeCategory
       );
+
   }
 
   if(q){
@@ -998,14 +1185,15 @@ function renderCards(){
 
   }
 
-  document.getElementById(
-    "count-badge"
-  ).innerText =
-    `${filtered.length} link`;
+  document
+    .getElementById("count-badge")
+    .innerText =
+      `${filtered.length} link`;
 
   if(!filtered.length){
 
     container.innerHTML = `
+
       <div class="empty">
 
         <i class="ti ti-bookmark-off"></i>
@@ -1017,9 +1205,11 @@ function renderCards(){
         </p>
 
       </div>
+
     `;
 
     return;
+
   }
 
   container.innerHTML = "";
@@ -1033,96 +1223,133 @@ function renderCards(){
 
     card.innerHTML = `
 
-      <div class="card-top">
+      ${
+        b.thumbnail
 
-        ${
-          b.favicon
+        ? `
+          <div class="card-preview">
 
-          ? `
             <img
-              class="favicon"
-              src="${b.favicon}"
+              src="${b.thumbnail}"
+              alt=""
             />
-          `
 
-          : `
-            <div class="favicon-placeholder">
-              <i class="ti ti-world"></i>
-            </div>
-          `
-        }
+            ${
+              b.previewType !== "website"
 
-        <div style="min-width:0">
+              ? `
+                <div class="preview-overlay">
 
-          <div class="card-title">
-            ${escHtml(b.title)}
+                  <div class="play-btn">
+                    <i class="ti ti-player-play-filled"></i>
+                  </div>
+
+                </div>
+              `
+
+              : ""
+            }
+
           </div>
+        `
 
-          <div class="card-url">
-            ${escHtml(getDomain(b.url))}
+        : ""
+      }
+
+      <div class="card-body">
+
+        <div class="card-top">
+
+          ${
+            b.favicon
+
+            ? `
+              <img
+                class="favicon"
+                src="${b.favicon}"
+              />
+            `
+
+            : `
+              <div class="favicon-placeholder">
+                <i class="ti ti-world"></i>
+              </div>
+            `
+          }
+
+          <div style="min-width:0">
+
+            <div class="card-title">
+              ${escHtml(b.title)}
+            </div>
+
+            <div class="card-url">
+              ${escHtml(getDomain(b.url))}
+            </div>
+
           </div>
 
         </div>
 
-      </div>
+        ${
+          b.summary
 
-      ${
-        b.summary
+          ? `
+            <div class="card-summary">
+              ${escHtml(b.summary)}
+            </div>
+          `
 
-        ? `
-          <div class="card-summary">
-            ${escHtml(b.summary)}
-          </div>
-        `
+          : ""
+        }
 
-        : ""
-      }
+        ${
+          b.note
 
-      ${
-        b.note
+          ? `
+            <div class="card-note">
+              ${escHtml(b.note)}
+            </div>
+          `
 
-        ? `
-          <div class="card-note">
-            ${escHtml(b.note)}
-          </div>
-        `
+          : ""
+        }
 
-        : ""
-      }
+        <div class="card-tags">
 
-      <div class="card-tags">
+          <span class="cat-badge">
+            ${escHtml(b.category)}
+          </span>
 
-        <span class="cat-badge">
-          ${escHtml(b.category)}
-        </span>
+        </div>
 
-      </div>
+        <div class="card-footer">
 
-      <div class="card-footer">
-
-        <a
-          href="${escHtml(b.url)}"
-          target="_blank"
-        >
-          <i class="ti ti-external-link"></i>
-          Buka
-        </a>
-
-        <div class="card-actions">
-
-          <button
-            class="icon-btn"
-            onclick="editNote('${b.id}')"
+          <a
+            href="${escHtml(b.url)}"
+            target="_blank"
           >
-            <i class="ti ti-edit"></i>
-          </button>
+            <i class="ti ti-external-link"></i>
+            Buka
+          </a>
 
-          <button
-            class="icon-btn"
-            onclick="deleteBookmark('${b.id}')"
-          >
-            <i class="ti ti-trash"></i>
-          </button>
+          <div class="card-actions">
+
+            <button
+              class="icon-btn"
+              onclick="editNote('${b.id}')"
+            >
+              <i class="ti ti-edit"></i>
+            </button>
+
+            <button
+              class="icon-btn"
+              onclick="deleteBookmark('${b.id}')"
+            >
+              <i class="ti ti-trash"></i>
+            </button>
+
+          </div>
 
         </div>
 
@@ -1137,8 +1364,10 @@ function renderCards(){
 }
 
 function renderAll(){
+
   renderFilters();
   renderCards();
+
 }
 
 /* EVENTS */
@@ -1155,9 +1384,11 @@ document
   .addEventListener(
     "keydown",
     e => {
+
       if(e.key === "Enter"){
         handleAdd();
       }
+
     }
   );
 
