@@ -1,20 +1,21 @@
 <!--
-========================================
-LINKKU — FINAL PRODUCTION VERSION
+========================================================
+LINKKU — FINAL PRODUCTION READY
 Visual Bookmark Manager
-========================================
-FEATURES:
-- Beautiful modern UI
-- TikTok/Reels/YouTube thumbnails
-- Compact visual cards
-- Responsive
+========================================================
+FEATURES
+- Visual preview thumbnails
+- TikTok / Reels / YouTube support
+- Compact masonry layout
+- Editable notes
+- Editable title
+- Editable category
 - Search
-- Category filters
+- Filters
+- Responsive
 - LocalStorage
-- Hover animations
-- Production-ready CSS
-- Masonry-style layout
-========================================
+- Production-ready UI
+========================================================
 -->
 
 <!DOCTYPE html>
@@ -22,9 +23,13 @@ FEATURES:
 <head>
 
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>Linkku — Visual Bookmark Manager</title>
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+/>
+
+<title>Linkku</title>
 
 <link
   rel="stylesheet"
@@ -38,9 +43,9 @@ FEATURES:
 
 <style>
 
-/* ====================================
+/* ========================================
 ROOT
-==================================== */
+======================================== */
 
 :root{
 
@@ -66,9 +71,9 @@ ROOT
 
 }
 
-/* ====================================
+/* ========================================
 RESET
-==================================== */
+======================================== */
 
 *{
   margin:0;
@@ -85,6 +90,7 @@ body{
 body{
 
   background:var(--bg);
+
   color:var(--text);
 
   font-family:
@@ -96,9 +102,9 @@ body{
 
 }
 
-/* ====================================
+/* ========================================
 APP
-==================================== */
+======================================== */
 
 #app{
 
@@ -107,13 +113,13 @@ APP
 
   margin:auto;
 
-  padding:34px 26px 80px;
+  padding:34px 24px 80px;
 
 }
 
-/* ====================================
+/* ========================================
 HEADER
-==================================== */
+======================================== */
 
 .header{
 
@@ -121,7 +127,7 @@ HEADER
   align-items:center;
   justify-content:space-between;
 
-  margin-bottom:30px;
+  margin-bottom:28px;
 
 }
 
@@ -150,9 +156,9 @@ HEADER
 
 }
 
-/* ====================================
+/* ========================================
 ADD BAR
-==================================== */
+======================================== */
 
 .add-bar{
 
@@ -166,7 +172,7 @@ ADD BAR
 .input{
 
   width:100%;
-  height:72px;
+  height:70px;
 
   border:none;
   outline:none;
@@ -193,7 +199,7 @@ ADD BAR
 
 .input:focus{
 
-  border-color:#3b3b45;
+  border-color:#3a3a44;
 
   background:#1a1a20;
 
@@ -201,14 +207,14 @@ ADD BAR
 
 .primary-btn{
 
-  height:72px;
+  height:70px;
 
   border:none;
   outline:none;
 
   background:transparent;
 
-  border:1px solid #36363d;
+  border:1px solid #383840;
 
   border-radius:24px;
 
@@ -220,7 +226,7 @@ ADD BAR
   align-items:center;
   gap:10px;
 
-  font-size:17px;
+  font-size:16px;
   font-weight:600;
 
   cursor:pointer;
@@ -239,9 +245,9 @@ ADD BAR
 
 }
 
-/* ====================================
+/* ========================================
 FILTERS
-==================================== */
+======================================== */
 
 .filters{
 
@@ -289,9 +295,9 @@ FILTERS
 
 .tag-pill.active{
 
-  background:#22222a;
+  background:#23232b;
 
-  border-color:#3a3a45;
+  border-color:#3c3c45;
 
   color:white;
 
@@ -323,9 +329,9 @@ FILTERS
 
 }
 
-/* ====================================
-MASONRY LAYOUT
-==================================== */
+/* ========================================
+MASONRY
+======================================== */
 
 .cards{
 
@@ -365,11 +371,9 @@ MASONRY LAYOUT
 
 }
 
-/* ====================================
+/* ========================================
 PREVIEW
-==================================== */
-
-
+======================================== */
 
 .card-preview{
 
@@ -377,9 +381,14 @@ PREVIEW
 
   width:100%;
 
+  aspect-ratio:16/10;
+
+  max-height:180px;
+
   overflow:hidden;
 
-  background:#1c
+  background:#1c1c21;
+
 }
 
 .card-preview.portrait{
@@ -397,14 +406,13 @@ PREVIEW
 
   object-fit:cover;
 
-  display:block;
   object-position:center;
+
+  display:block;
 
   transition:.45s ease;
 
 }
-
-
 
 .card:hover .card-preview img{
   transform:scale(1.04);
@@ -420,16 +428,16 @@ PREVIEW
   background:
     linear-gradient(
       to top,
-      rgba(0,0,0,.6),
-      rgba(0,0,0,.1),
+      rgba(0,0,0,.65),
+      rgba(0,0,0,.15),
       transparent
     );
 
 }
 
-/* ====================================
+/* ========================================
 OVERLAY
-==================================== */
+======================================== */
 
 .preview-overlay{
 
@@ -446,8 +454,8 @@ OVERLAY
 
 .play-btn{
 
-  width:68px;
-  height:68px;
+  width:62px;
+  height:62px;
 
   border-radius:999px;
 
@@ -461,13 +469,13 @@ OVERLAY
 
   color:white;
 
-  font-size:28px;
+  font-size:26px;
 
 }
 
-/* ====================================
+/* ========================================
 TEXT OVERLAY
-==================================== */
+======================================== */
 
 .preview-info{
 
@@ -480,10 +488,6 @@ TEXT OVERLAY
   z-index:4;
 
   padding:18px;
-
-  display:flex;
-  flex-direction:column;
-  gap:6px;
 
 }
 
@@ -507,7 +511,9 @@ TEXT OVERLAY
 
 .preview-desc{
 
-  color:rgba(255,255,255,.8);
+  margin-top:6px;
+
+  color:rgba(255,255,255,.78);
 
   font-size:13px;
 
@@ -522,9 +528,9 @@ TEXT OVERLAY
 
 }
 
-/* ====================================
+/* ========================================
 CARD BODY
-==================================== */
+======================================== */
 
 .card-body{
   padding:18px;
@@ -566,7 +572,7 @@ CARD BODY
   align-items:center;
   justify-content:center;
 
-  color:#8a8a94;
+  color:#8b8b95;
 
 }
 
@@ -582,15 +588,29 @@ CARD BODY
 
 }
 
-/* ====================================
+.card-note{
+
+  margin-top:14px;
+
+  color:#b7b7c0;
+
+  font-size:14px;
+
+  line-height:1.7;
+
+}
+
+/* ========================================
 BADGES
-==================================== */
+======================================== */
 
 .card-tags{
 
   display:flex;
   flex-wrap:wrap;
   gap:8px;
+
+  margin-top:14px;
 
 }
 
@@ -611,9 +631,9 @@ BADGES
 
 }
 
-/* ====================================
+/* ========================================
 FOOTER
-==================================== */
+======================================== */
 
 .card-footer{
 
@@ -641,6 +661,13 @@ FOOTER
 
 .card-footer a:hover{
   color:white;
+}
+
+.card-actions{
+
+  display:flex;
+  gap:8px;
+
 }
 
 .icon-btn{
@@ -672,9 +699,9 @@ FOOTER
 
 }
 
-/* ====================================
+/* ========================================
 EMPTY
-==================================== */
+======================================== */
 
 .empty{
 
@@ -709,31 +736,127 @@ EMPTY
 
 }
 
-/* ====================================
-LOADING
-==================================== */
+/* ========================================
+MODAL
+======================================== */
 
-.loading{
+.modal-overlay{
 
-  animation:pulse 1.2s infinite;
+  position:fixed;
+  inset:0;
+
+  background:rgba(0,0,0,.7);
+
+  backdrop-filter:blur(8px);
+
+  z-index:999;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:20px;
 
 }
 
-@keyframes pulse{
+.modal{
 
-  0%,100%{
-    opacity:1;
-  }
+  width:100%;
+  max-width:480px;
 
-  50%{
-    opacity:.45;
-  }
+  background:#18181d;
+
+  border:1px solid #2d2d35;
+
+  border-radius:30px;
+
+  padding:28px;
+
+  display:flex;
+  flex-direction:column;
+  gap:18px;
 
 }
 
-/* ====================================
+.modal h2{
+  font-size:24px;
+}
+
+.modal label{
+
+  display:block;
+
+  margin-bottom:8px;
+
+  color:#9f9fa8;
+
+  font-size:14px;
+
+}
+
+.modal input,
+.modal textarea{
+
+  width:100%;
+
+  border:none;
+  outline:none;
+
+  background:#202027;
+
+  border:1px solid #34343c;
+
+  border-radius:16px;
+
+  padding:16px;
+
+  color:white;
+
+  font-size:14px;
+
+}
+
+.modal-actions{
+
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+
+}
+
+.modal-btn{
+
+  height:48px;
+
+  border:none;
+
+  border-radius:16px;
+
+  padding:0 18px;
+
+  cursor:pointer;
+
+  font-weight:600;
+
+}
+
+.btn-secondary{
+
+  background:#25252d;
+  color:white;
+
+}
+
+.btn-primary{
+
+  background:white;
+  color:black;
+
+}
+
+/* ========================================
 RESPONSIVE
-==================================== */
+======================================== */
 
 @media(max-width:768px){
 
@@ -799,7 +922,7 @@ RESPONSIVE
       id="url-input"
       class="input"
       type="url"
-      placeholder="Paste URL TikTok, Reels, YouTube, Article..."
+      placeholder="Paste URL TikTok, Reels, YouTube..."
     />
 
     <button
@@ -812,7 +935,7 @@ RESPONSIVE
 
   </div>
 
-  <!-- FILTER -->
+  <!-- FILTERS -->
 
   <div
     class="filters"
@@ -830,20 +953,20 @@ RESPONSIVE
 
 <script>
 
-/* ====================================
+/* ========================================
 STATE
-==================================== */
+======================================== */
 
 const STORAGE_KEY =
-  "linkku_visual_final";
+  "linkku_visual_bookmarks_vFinal";
 
 let bookmarks = [];
 
 let activeCategory = "all";
 
-/* ====================================
+/* ========================================
 HELPERS
-==================================== */
+======================================== */
 
 function escHtml(str=""){
 
@@ -915,9 +1038,9 @@ function detectPlatform(url){
 
 }
 
-/* ====================================
+/* ========================================
 LOCAL STORAGE
-==================================== */
+======================================== */
 
 function saveData(){
 
@@ -943,9 +1066,9 @@ function loadData(){
 
 }
 
-/* ====================================
-FETCH PREVIEW
-==================================== */
+/* ========================================
+PREVIEW FETCH
+======================================== */
 
 async function getLinkPreview(url){
 
@@ -997,9 +1120,9 @@ async function getLinkPreview(url){
 
 }
 
-/* ====================================
-ADD
-==================================== */
+/* ========================================
+ADD BOOKMARK
+======================================== */
 
 async function handleAdd(){
 
@@ -1043,6 +1166,8 @@ async function handleAdd(){
     category:
       detectPlatform(url),
 
+    note:"",
+
     createdAt:
       new Date().toISOString()
 
@@ -1054,9 +1179,9 @@ async function handleAdd(){
 
 }
 
-/* ====================================
+/* ========================================
 LOADING
-==================================== */
+======================================== */
 
 function renderLoading(){
 
@@ -1066,7 +1191,7 @@ function renderLoading(){
     )
     .innerHTML = `
 
-      <div class="card loading">
+      <div class="card">
 
         <div class="card-preview"></div>
 
@@ -1084,9 +1209,9 @@ function renderLoading(){
 
 }
 
-/* ====================================
+/* ========================================
 DELETE
-==================================== */
+======================================== */
 
 function deleteBookmark(id){
 
@@ -1108,9 +1233,137 @@ function deleteBookmark(id){
 
 }
 
-/* ====================================
+/* ========================================
+EDIT
+======================================== */
+
+function editBookmark(id){
+
+  const b =
+    bookmarks.find(x => x.id === id);
+
+  if(!b) return;
+
+  const modal =
+    document.createElement("div");
+
+  modal.className =
+    "modal-overlay";
+
+  modal.id =
+    "edit-modal";
+
+  modal.innerHTML = `
+
+    <div class="modal">
+
+      <h2>Edit Bookmark</h2>
+
+      <div>
+
+        <label>Title</label>
+
+        <input
+          id="edit-title"
+          value="${escHtml(b.title)}"
+        />
+
+      </div>
+
+      <div>
+
+        <label>Description</label>
+
+        <textarea
+          id="edit-note"
+          rows="4"
+        >${escHtml(b.note || "")}</textarea>
+
+      </div>
+
+      <div>
+
+        <label>Category</label>
+
+        <input
+          id="edit-category"
+          value="${escHtml(b.category)}"
+        />
+
+      </div>
+
+      <div class="modal-actions">
+
+        <button
+          class="modal-btn btn-secondary"
+          onclick="closeModal()"
+        >
+          Cancel
+        </button>
+
+        <button
+          class="modal-btn btn-primary"
+          onclick="saveEdit('${b.id}')"
+        >
+          Save
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+  document.body.appendChild(modal);
+
+}
+
+function saveEdit(id){
+
+  const b =
+    bookmarks.find(x => x.id === id);
+
+  if(!b) return;
+
+  b.title =
+    document.getElementById(
+      "edit-title"
+    ).value;
+
+  b.note =
+    document.getElementById(
+      "edit-note"
+    ).value;
+
+  b.category =
+    document.getElementById(
+      "edit-category"
+    ).value;
+
+  saveData();
+
+  closeModal();
+
+  renderAll();
+
+}
+
+function closeModal(){
+
+  const modal =
+    document.getElementById(
+      "edit-modal"
+    );
+
+  if(modal){
+    modal.remove();
+  }
+
+}
+
+/* ========================================
 FILTERS
-==================================== */
+======================================== */
 
 function filterCat(cat){
 
@@ -1190,9 +1443,9 @@ function renderFilters(){
 
 }
 
-/* ====================================
+/* ========================================
 RENDER
-==================================== */
+======================================== */
 
 function renderCards(){
 
@@ -1234,6 +1487,12 @@ function renderCards(){
           ||
 
           b.summary
+            .toLowerCase()
+            .includes(q)
+
+          ||
+
+          b.note
             .toLowerCase()
             .includes(q)
 
@@ -1383,6 +1642,18 @@ function renderCards(){
 
         </div>
 
+        ${
+          b.note
+
+          ? `
+            <div class="card-note">
+              ${escHtml(b.note)}
+            </div>
+          `
+
+          : ""
+        }
+
         <div class="card-tags">
 
           <span class="cat-badge">
@@ -1401,12 +1672,23 @@ function renderCards(){
             Buka
           </a>
 
-          <button
-            class="icon-btn"
-            onclick="deleteBookmark('${b.id}')"
-          >
-            <i class="ti ti-trash"></i>
-          </button>
+          <div class="card-actions">
+
+            <button
+              class="icon-btn"
+              onclick="editBookmark('${b.id}')"
+            >
+              <i class="ti ti-edit"></i>
+            </button>
+
+            <button
+              class="icon-btn"
+              onclick="deleteBookmark('${b.id}')"
+            >
+              <i class="ti ti-trash"></i>
+            </button>
+
+          </div>
 
         </div>
 
@@ -1427,9 +1709,9 @@ function renderAll(){
 
 }
 
-/* ====================================
+/* ========================================
 EVENTS
-==================================== */
+======================================== */
 
 document
   .getElementById("add-btn")
@@ -1453,9 +1735,9 @@ document
     }
   );
 
-/* ====================================
+/* ========================================
 INIT
-==================================== */
+======================================== */
 
 loadData();
 
