@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>Linkku — Smart Bookmark Manager</title>
+<title>Linkku — Visual Bookmark Manager</title>
 
 <link
   rel="stylesheet"
@@ -17,8 +17,14 @@
 
 <style>
 
+/* =========================
+   ROOT
+========================= */
+
 :root{
+
   --bg:#0d0d0f;
+
   --surface:#17171a;
   --surface-hover:#1d1d22;
 
@@ -28,19 +34,22 @@
   --text-secondary:#a1a1aa;
   --text-muted:#71717a;
 
-  --primary:#ffffff;
-
   --radius-xl:28px;
   --radius-lg:22px;
   --radius-md:18px;
   --radius-sm:14px;
 
+  --transition:.22s ease;
+
   --shadow:
-    0 1px 1px rgba(0,0,0,.35),
+    0 1px 1px rgba(0,0,0,.4),
     0 20px 40px rgba(0,0,0,.35);
 
-  --transition:.22s ease;
 }
+
+/* =========================
+   RESET
+========================= */
 
 *{
   margin:0;
@@ -66,36 +75,46 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 
-/* APP */
+/* =========================
+   APP
+========================= */
 
 #app{
+
   width:100%;
   max-width:1550px;
 
   margin:auto;
 
-  padding:38px 26px 90px;
+  padding:40px 24px 90px;
+
 }
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 
 .header{
+
   display:flex;
   align-items:center;
   justify-content:space-between;
 
-  margin-bottom:32px;
+  margin-bottom:34px;
+
 }
 
 .logo{
+
   display:flex;
   align-items:center;
   gap:14px;
 
-  font-size:52px;
+  font-size:54px;
   font-weight:800;
 
   letter-spacing:-2px;
+
 }
 
 .logo i{
@@ -107,16 +126,21 @@ body{
   font-size:14px;
 }
 
-/* TOP BAR */
+/* =========================
+   INPUT BAR
+========================= */
 
 .add-bar{
+
   display:flex;
   gap:16px;
 
   margin-bottom:28px;
+
 }
 
 .input{
+
   width:100%;
   height:74px;
 
@@ -129,13 +153,14 @@ body{
 
   border-radius:24px;
 
-  padding:0 26px;
+  padding:0 24px;
 
   color:white;
 
   font-size:18px;
 
   transition:var(--transition);
+
 }
 
 .input::placeholder{
@@ -143,11 +168,12 @@ body{
 }
 
 .input:focus{
-  border-color:#3f3f46;
   background:#1d1d22;
+  border-color:#3b3b45;
 }
 
 .primary-btn{
+
   height:74px;
 
   border:none;
@@ -157,11 +183,11 @@ body{
 
   border:1px solid #3a3a40;
 
-  color:white;
-
   border-radius:24px;
 
   padding:0 28px;
+
+  color:white;
 
   display:flex;
   align-items:center;
@@ -175,26 +201,35 @@ body{
   transition:var(--transition);
 
   flex-shrink:0;
+
 }
 
 .primary-btn:hover{
+
   background:#202027;
+
   transform:translateY(-1px);
+
 }
 
-/* FILTER */
+/* =========================
+   FILTER
+========================= */
 
 .filters{
+
   display:flex;
   align-items:center;
   gap:12px;
 
   flex-wrap:wrap;
 
-  margin-bottom:36px;
+  margin-bottom:38px;
+
 }
 
 .tag-pill{
+
   border:none;
   outline:none;
 
@@ -202,29 +237,35 @@ body{
 
   border:1px solid var(--border);
 
-  color:var(--text-secondary);
-
   border-radius:999px;
+
+  color:var(--text-secondary);
 
   padding:14px 22px;
 
   cursor:pointer;
 
+  transition:var(--transition);
+
   font-size:15px;
   font-weight:500;
 
-  transition:var(--transition);
 }
 
 .tag-pill:hover{
+
   background:#1d1d22;
   color:white;
+
 }
 
 .tag-pill.active{
+
   background:#202027;
-  color:white;
   border-color:#3a3a40;
+
+  color:white;
+
 }
 
 .search-wrap{
@@ -232,6 +273,7 @@ body{
 }
 
 .search-input{
+
   width:340px;
   height:58px;
 
@@ -249,22 +291,30 @@ body{
   color:white;
 
   font-size:15px;
+
 }
 
-/* GRID */
+/* =========================
+   GRID
+========================= */
 
 .cards{
+
   display:grid;
 
   grid-template-columns:
     repeat(auto-fill,minmax(360px,1fr));
 
   gap:20px;
+
 }
 
-/* CARD */
+/* =========================
+   CARD
+========================= */
 
 .card{
+
   background:var(--surface);
 
   border:1px solid var(--border);
@@ -276,21 +326,25 @@ body{
   transition:var(--transition);
 
   box-shadow:var(--shadow);
+
 }
 
 .card:hover{
+
   transform:translateY(-4px);
+
   background:var(--surface-hover);
+
   border-color:#393942;
+
 }
 
-.card-body{
-  padding:22px;
-}
-
-/* PREVIEW */
+/* =========================
+   PREVIEW
+========================= */
 
 .card-preview{
+
   width:100%;
   height:220px;
 
@@ -299,18 +353,44 @@ body{
   overflow:hidden;
 
   background:#1f1f25;
+
 }
 
 .card-preview img{
+
   width:100%;
   height:100%;
 
   object-fit:cover;
 
   display:block;
+
+  transition:.5s ease;
+
+}
+
+.card:hover .card-preview img{
+  transform:scale(1.05);
+}
+
+.card-preview::after{
+
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0,0,0,.4),
+      transparent
+    );
+
 }
 
 .preview-overlay{
+
   position:absolute;
   inset:0;
 
@@ -318,23 +398,20 @@ body{
   align-items:center;
   justify-content:center;
 
-  background:
-    linear-gradient(
-      to top,
-      rgba(0,0,0,.45),
-      rgba(0,0,0,.1)
-    );
+  z-index:2;
+
 }
 
 .play-btn{
+
   width:72px;
   height:72px;
 
   border-radius:999px;
 
-  background:rgba(255,255,255,.18);
+  background:rgba(255,255,255,.15);
 
-  backdrop-filter:blur(8px);
+  backdrop-filter:blur(10px);
 
   display:flex;
   align-items:center;
@@ -343,19 +420,29 @@ body{
   color:white;
 
   font-size:28px;
+
 }
 
-/* TOP */
+/* =========================
+   BODY
+========================= */
+
+.card-body{
+  padding:22px;
+}
 
 .card-top{
+
   display:flex;
   align-items:flex-start;
   gap:14px;
 
   margin-bottom:18px;
+
 }
 
 .favicon{
+
   width:46px;
   height:46px;
 
@@ -364,9 +451,11 @@ body{
   object-fit:cover;
 
   flex-shrink:0;
+
 }
 
 .favicon-placeholder{
+
   width:46px;
   height:46px;
 
@@ -381,16 +470,20 @@ body{
   color:#8b8b93;
 
   flex-shrink:0;
+
 }
 
 .card-title{
+
   font-size:19px;
   font-weight:700;
 
   line-height:1.4;
+
 }
 
 .card-url{
+
   margin-top:5px;
 
   color:var(--text-muted);
@@ -400,69 +493,60 @@ body{
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
+
 }
 
-/* CONTENT */
-
 .card-summary{
+
   color:#b5b5bd;
 
   line-height:1.7;
 
   font-size:14px;
 
-  margin-bottom:16px;
+  margin-bottom:18px;
+
 }
-
-.card-note{
-  color:#ececec;
-
-  line-height:1.7;
-
-  font-size:14px;
-
-  margin-bottom:16px;
-}
-
-/* TAGS */
 
 .card-tags{
+
   display:flex;
   flex-wrap:wrap;
   gap:8px;
 
   margin-bottom:18px;
+
 }
 
-.tag,
 .cat-badge{
+
   padding:7px 12px;
 
   border-radius:999px;
 
+  background:#30303a;
+
+  color:white;
+
   font-size:12px;
   font-weight:600;
+
 }
 
-.tag{
-  background:#24242a;
-  color:#b4b4bc;
-}
-
-.cat-badge{
-  background:#30303a;
-  color:white;
-}
-
-/* FOOTER */
+/* =========================
+   FOOTER
+========================= */
 
 .card-footer{
+
   display:flex;
   align-items:center;
   justify-content:space-between;
+
 }
 
 .card-footer a{
+
   display:flex;
   align-items:center;
   gap:6px;
@@ -472,6 +556,7 @@ body{
   color:#d4d4d8;
 
   font-size:14px;
+
 }
 
 .card-footer a:hover{
@@ -479,11 +564,14 @@ body{
 }
 
 .card-actions{
+
   display:flex;
   gap:8px;
+
 }
 
 .icon-btn{
+
   width:40px;
   height:40px;
 
@@ -497,19 +585,25 @@ body{
 
   cursor:pointer;
 
+  transition:var(--transition);
+
   font-size:17px;
 
-  transition:var(--transition);
 }
 
 .icon-btn:hover{
+
   background:#25252c;
   color:white;
+
 }
 
-/* EMPTY */
+/* =========================
+   EMPTY
+========================= */
 
 .empty{
+
   grid-column:1/-1;
 
   display:flex;
@@ -522,29 +616,35 @@ body{
   text-align:center;
 
   color:var(--text-secondary);
+
 }
 
 .empty i{
+
   font-size:64px;
+
   margin-bottom:18px;
+
 }
 
 .empty h3{
+
   font-size:30px;
-  margin-bottom:12px;
+
+  margin-bottom:10px;
+
 }
 
-.empty p{
-  font-size:15px;
-}
-
-/* MODAL */
+/* =========================
+   MODAL
+========================= */
 
 .modal-overlay{
+
   position:fixed;
   inset:0;
 
-  background:rgba(0,0,0,.72);
+  background:rgba(0,0,0,.7);
 
   backdrop-filter:blur(10px);
 
@@ -555,9 +655,11 @@ body{
   justify-content:center;
 
   padding:20px;
+
 }
 
 .modal{
+
   width:100%;
   max-width:460px;
 
@@ -572,6 +674,7 @@ body{
   display:flex;
   flex-direction:column;
   gap:18px;
+
 }
 
 .modal h2{
@@ -579,6 +682,7 @@ body{
 }
 
 .modal label{
+
   display:block;
 
   margin-bottom:8px;
@@ -586,10 +690,12 @@ body{
   color:#a1a1aa;
 
   font-size:14px;
+
 }
 
 .modal textarea,
 .modal input{
+
   width:100%;
 
   border:none;
@@ -606,15 +712,19 @@ body{
   color:white;
 
   font-size:14px;
+
 }
 
 .modal-actions{
+
   display:flex;
   justify-content:flex-end;
   gap:12px;
+
 }
 
 .modal-btn{
+
   height:50px;
 
   border:none;
@@ -626,19 +736,26 @@ body{
   font-weight:600;
 
   cursor:pointer;
+
 }
 
 .btn-secondary{
+
   background:#25252d;
   color:white;
+
 }
 
 .btn-primary{
+
   background:white;
   color:black;
+
 }
 
-/* MOBILE */
+/* =========================
+   MOBILE
+========================= */
 
 @media (max-width:768px){
 
@@ -704,7 +821,7 @@ body{
       id="url-input"
       class="input"
       type="url"
-      placeholder="Paste URL di sini..."
+      placeholder="Paste URL TikTok, Reels, YouTube, Article..."
     />
 
     <button
@@ -733,12 +850,19 @@ body{
 
 <script>
 
-const STORAGE_KEY = "linkku_pro_v1";
+/* =========================
+   STORAGE
+========================= */
+
+const STORAGE_KEY =
+  "linkku_visual_v1";
 
 let bookmarks = [];
 let activeCategory = "all";
 
-/* STORAGE */
+/* =========================
+   STORAGE METHODS
+========================= */
 
 function saveData(){
 
@@ -764,7 +888,9 @@ function loadData(){
 
 }
 
-/* HELPERS */
+/* =========================
+   HELPERS
+========================= */
 
 function escHtml(str=""){
 
@@ -825,75 +951,72 @@ function detectPlatform(url){
     return "instagram";
   }
 
+  if(url.includes("twitter.com") ||
+     url.includes("x.com")){
+    return "twitter";
+  }
+
   return "website";
 
 }
 
-function getEmbedData(url){
+/* =========================
+   FETCH PREVIEW
+========================= */
 
-  const type =
-    detectPlatform(url);
+async function getLinkPreview(url){
 
-  /* YOUTUBE */
+  try{
 
-  if(type === "youtube"){
+    const response =
+      await fetch(
+        `https://api.microlink.io/?url=${encodeURIComponent(url)}`
+      );
 
-    try{
-
-      const u = new URL(url);
-
-      let id = "";
-
-      if(u.hostname.includes("youtu.be")){
-        id = u.pathname.slice(1);
-      }else{
-        id = u.searchParams.get("v");
-      }
-
-      return {
-        type,
-        thumbnail:
-          `https://img.youtube.com/vi/${id}/hqdefault.jpg`
-      };
-
-    }catch{}
-
-  }
-
-  /* TIKTOK */
-
-  if(type === "tiktok"){
+    const result =
+      await response.json();
 
     return {
-      type,
+
+      title:
+        result.data?.title ||
+        getDomain(url),
+
+      summary:
+        result.data?.description ||
+        "",
+
       thumbnail:
-        "https://placehold.co/800x500/111/FFF?text=TikTok"
+        result.data?.image?.url ||
+        "",
+
+      favicon:
+        result.data?.logo?.url ||
+        getFavicon(url)
+
+    };
+
+  }catch{
+
+    return {
+
+      title:getDomain(url),
+
+      summary:"",
+      thumbnail:"",
+      favicon:getFavicon(url)
+
     };
 
   }
-
-  /* INSTAGRAM */
-
-  if(type === "instagram"){
-
-    return {
-      type,
-      thumbnail:
-        "https://placehold.co/800x500/111/FFF?text=Instagram"
-    };
-
-  }
-
-  return {
-    type:"website",
-    thumbnail:""
-  };
 
 }
 
-/* ADD */
+/* =========================
+   ADD BOOKMARK
+========================= */
 
-function handleAdd(){
+async function handleAdd(){
 
   const input =
     document.getElementById("url-input");
@@ -907,47 +1030,78 @@ function handleAdd(){
     url = "https://" + url;
   }
 
-  const embed =
-    getEmbedData(url);
+  input.value = "";
 
-  const bookmark = {
+  const tempId =
+    crypto.randomUUID();
 
-    id:crypto.randomUUID(),
+  showLoadingCard(tempId);
+
+  const preview =
+    await getLinkPreview(url);
+
+  bookmarks.unshift({
+
+    id:tempId,
 
     url,
 
-    title:getDomain(url),
+    title:preview.title,
 
-    summary:"",
+    summary:preview.summary,
 
-    note:"",
+    favicon:preview.favicon,
 
-    category:embed.type,
+    thumbnail:preview.thumbnail,
 
-    tags:[],
-
-    favicon:getFavicon(url),
-
-    previewType:embed.type,
-
-    thumbnail:embed.thumbnail,
+    category:
+      detectPlatform(url),
 
     createdAt:
       new Date().toISOString()
 
-  };
-
-  bookmarks.unshift(bookmark);
+  });
 
   saveData();
-
-  input.value = "";
 
   renderAll();
 
 }
 
-/* DELETE */
+/* =========================
+   LOADING
+========================= */
+
+function showLoadingCard(){
+
+  const container =
+    document.getElementById(
+      "cards-container"
+    );
+
+  container.innerHTML = `
+
+    <div class="card">
+
+      <div class="card-preview"></div>
+
+      <div class="card-body">
+
+        <div class="card-summary">
+          Mengambil preview...
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+/* =========================
+   DELETE
+========================= */
 
 function deleteBookmark(id){
 
@@ -967,112 +1121,9 @@ function deleteBookmark(id){
 
 }
 
-/* EDIT */
-
-function editNote(id){
-
-  const b =
-    bookmarks.find(
-      x => x.id === id
-    );
-
-  if(!b) return;
-
-  const modal =
-    document.getElementById("modal");
-
-  modal.innerHTML = `
-
-    <div class="modal-overlay">
-
-      <div class="modal">
-
-        <h2>Edit Bookmark</h2>
-
-        <div>
-
-          <label>Catatan</label>
-
-          <textarea
-            id="note-input"
-            rows="4"
-          >${escHtml(b.note || "")}</textarea>
-
-        </div>
-
-        <div>
-
-          <label>Kategori</label>
-
-          <input
-            id="cat-input"
-            value="${escHtml(b.category || "")}"
-          />
-
-        </div>
-
-        <div class="modal-actions">
-
-          <button
-            class="modal-btn btn-secondary"
-            onclick="closeModal()"
-          >
-            Batal
-          </button>
-
-          <button
-            class="modal-btn btn-primary"
-            onclick="saveNote('${b.id}')"
-          >
-            Simpan
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  `;
-
-}
-
-function closeModal(){
-
-  document
-    .getElementById("modal")
-    .innerHTML = "";
-
-}
-
-function saveNote(id){
-
-  const b =
-    bookmarks.find(
-      x => x.id === id
-    );
-
-  if(!b) return;
-
-  b.note =
-    document
-      .getElementById("note-input")
-      .value;
-
-  b.category =
-    document
-      .getElementById("cat-input")
-      .value || "website";
-
-  saveData();
-
-  closeModal();
-
-  renderAll();
-
-}
-
-/* FILTER */
+/* =========================
+   FILTER
+========================= */
 
 function filterCat(cat){
 
@@ -1089,12 +1140,15 @@ function renderFilters(){
     document.getElementById("filters");
 
   const cats = [
+
     "all",
+
     ...new Set(
       bookmarks.map(
         b => b.category
       )
     )
+
   ];
 
   wrap.innerHTML = "";
@@ -1131,19 +1185,23 @@ function renderFilters(){
     "search-wrap";
 
   search.innerHTML = `
+
     <input
       id="search-input"
       class="search-input"
       placeholder="Cari..."
       oninput="renderCards()"
     />
+
   `;
 
   wrap.appendChild(search);
 
 }
 
-/* RENDER */
+/* =========================
+   RENDER
+========================= */
 
 function renderCards(){
 
@@ -1176,9 +1234,23 @@ function renderCards(){
       filtered.filter(b => {
 
         return (
-          b.title.toLowerCase().includes(q) ||
-          b.url.toLowerCase().includes(q) ||
-          b.note.toLowerCase().includes(q)
+
+          b.title
+            .toLowerCase()
+            .includes(q)
+
+          ||
+
+          b.url
+            .toLowerCase()
+            .includes(q)
+
+          ||
+
+          b.summary
+            .toLowerCase()
+            .includes(q)
+
         );
 
       });
@@ -1216,6 +1288,9 @@ function renderCards(){
 
   filtered.forEach(b => {
 
+    const isVideo =
+      b.category !== "website";
+
     const card =
       document.createElement("div");
 
@@ -1227,15 +1302,21 @@ function renderCards(){
         b.thumbnail
 
         ? `
-          <div class="card-preview">
+
+          <a
+            href="${escHtml(b.url)}"
+            target="_blank"
+            class="card-preview"
+          >
 
             <img
-              src="${b.thumbnail}"
+              src="${escHtml(b.thumbnail)}"
               alt=""
+              loading="lazy"
             />
 
             ${
-              b.previewType !== "website"
+              isVideo
 
               ? `
                 <div class="preview-overlay">
@@ -1250,7 +1331,8 @@ function renderCards(){
               : ""
             }
 
-          </div>
+          </a>
+
         `
 
         : ""
@@ -1266,7 +1348,7 @@ function renderCards(){
             ? `
               <img
                 class="favicon"
-                src="${b.favicon}"
+                src="${escHtml(b.favicon)}"
               />
             `
 
@@ -1303,18 +1385,6 @@ function renderCards(){
           : ""
         }
 
-        ${
-          b.note
-
-          ? `
-            <div class="card-note">
-              ${escHtml(b.note)}
-            </div>
-          `
-
-          : ""
-        }
-
         <div class="card-tags">
 
           <span class="cat-badge">
@@ -1334,13 +1404,6 @@ function renderCards(){
           </a>
 
           <div class="card-actions">
-
-            <button
-              class="icon-btn"
-              onclick="editNote('${b.id}')"
-            >
-              <i class="ti ti-edit"></i>
-            </button>
 
             <button
               class="icon-btn"
@@ -1370,7 +1433,9 @@ function renderAll(){
 
 }
 
-/* EVENTS */
+/* =========================
+   EVENTS
+========================= */
 
 document
   .getElementById("add-btn")
@@ -1392,7 +1457,9 @@ document
     }
   );
 
-/* INIT */
+/* =========================
+   INIT
+========================= */
 
 loadData();
 
